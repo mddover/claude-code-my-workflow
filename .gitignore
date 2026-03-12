@@ -54,3 +54,16 @@ CLAUDE.local.md
 # Output artifacts — uncomment lines below based on your preference
 # *.rds
 # output/**/*.rds
+
+# ==============================================================================
+# Research content (papers, data, analysis, figures)
+# Keep these local — only workflow infrastructure is tracked in git
+# ==============================================================================
+Papers/
+R/
+Data/
+Figures/
+Bibliography/
+Presentations/
+explorations/
+Writing/
