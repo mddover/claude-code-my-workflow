@@ -1,0 +1,2294 @@
+\documentclass[12pt]{article}
+
+%%% Shared preamble (packages, fonts, layout)
+\usepackage{linguistics-preamble}
+\addbibresource{../../Bibliography/references.bib}
+
+%%% Paper-specific settings
+\lingset{exskip=0.8em}  % Override default example spacing
+
+%%% Paper-specific commands
+\newcommand{\exsub}{\alph{excnt}}
+\newcommand{\gap}{\rule{1.25em}{.5pt}} % inserting gaps
+
+\title{Deriving Anti-C-Command in Parasitic Gap Sentences}
+\author{Michael Dover and Masaya Yoshida}
+\date{2026}
+
+\newcommand{\TwoTreeCols}[2]{%
+  \noindent\parbox[t]{0.47\linewidth}{#1}%
+  \hspace{1.2em}%
+  \parbox[t]{0.47\linewidth}{#2}\par
+}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+Parasitic gaps (PGs) have long been a testing ground for syntactic theory, particularly in relation to constraints on movement and licensing \citep{culicover2000, culicover2001}. PGs are characterized by a displaced wh-phrase that is associated with two gap positions within the sentence. One of these positions, the licensing gap, occurs within a domain that permits wh-extraction. The second position, the parasitic gap, is situated inside a syntactic island \citep{ross1967}. The core puzzle is this: a gap inside an island is normally unacceptable, yet its acceptability improves substantially when a licensing gap is present elsewhere in the sentence. The relevant paradigm is presented in (\ref{ex0}).
+
+\pex \label{ex0}
+\a \label{ex0a} Which articles did John file \gap{} after reading them?
+\a \label{ex0b} *Which articles did John file them after reading \gap{}?
+\a \label{ex0c} Which articles did John file \gap{} after reading \gap{}?
+\xe
+
+In (\ref{ex0a}), the matrix object gap is well-formed on its own, with a pronoun in the adjunct. Extracting from the adjunct island alone, however, results in unacceptability (\ref{ex0b}). When this island gap co-occurs with an additional gap in the matrix clause, acceptability improves substantially (\ref{ex0c}). Explaining this interaction has been a central concern in syntactic theory.
+
+In accounting for the distribution of PGs, one widely proposed constraint is the anti-c-command (ACC) condition, which posits that a PG must not be c-commanded by its licensor \citep{engdahl1983}. This constraint is used to capture the unacceptability of cases like those in (\ref{ex00}), taken from \citet{engdahl1983}, in which the licensing gap appears in subject position and c-commands the PG:
+
+\pex \label{ex00}
+\a \label{ex00a} *Which articles \emph{t} got filed by John without him reading \emph{pg}?
+\a \label{ex00b} *Who \emph{t} sent a picture of \emph{pg}?
+\a \label{ex00c} *Who \emph{t} remembered talking to \emph{pg}? 
+\xe
+
+In each of these examples, the licensing gap in subject position c-commands the PG inside an island. Unlike in (\ref{ex0c}), the presence of a licensing gap does not render these cases acceptable.
+
+While this generalization does successfully capture the unacceptability of sentences like those in (\ref{ex00}), a fundamental challenge is to determine how ACC falls out from general principles of the grammar. This paper considers three previous accounts that attempt to derive ACC: trace-based \citep{chomsky1981, chomsky1982}, chain-based \citep{nunes2004}, and semantics-based \citep{nissenbaum2000, arregi2022}. Drawing on new experimental results and theoretical considerations, we argue that these accounts fail to capture the distribution of PGs. Instead, we propose that the empirical effects attributed to ACC can be derived from the interaction of sideward movement \citep{nunes2004}, Multiple Spell-Out \citep{uriagereka1999}, and the timing of structure building, without recourse to dedicated PG-licensing conditions or construction-specific constraints.
+
+The implications of this analysis extend beyond PGs, bearing on broader questions about locality conditions on movement and syntactic dependencies. To develop this argument, Section 2 reviews ACC and outlines previous efforts to account for it; Section 3 presents experimental data from complement-clause PGs that challenge these earlier accounts; and Section 4 lays out a locality-based account of ACC that predicts the experimental results. Section 4 also extends the analysis to prepositional dative PGs, supported by additional experimental evidence. Section 5 offers a summary and conclusion.
+
+\section{Anti-c-command}
+
+Early work by \citet{engdahl1983} observes that the availability of subject gaps serving as the licensing gap of a PG is more constrained than for object gaps. This can be observed in (\ref{ex1}). When the matrix object serves as the licensing gap, the result is an acceptable PG sentence (\ref{ex1a}). Extracting the subject, however, does not appear to license the PG (\ref{ex1b}). 
+
+\pex \label{ex1}
+\a \label{ex1a} Who did Mary like \gap{} after she met \gap{}?
+\a \label{ex1b} *Who \gap{} liked Mary after she met \gap{}?
+\xe
+
+Rather than suggesting a general ban on subject gaps as PG licensors, Engdahl shows that the crucial factor is the structural relationship between the two gap positions. In particular, her data reveal that PGs are unavailable when c-commanded by the licensing gap, but possible when this c-command relation does not obtain. The relevant comparison from Engdahl is shown in (\ref{ex2}). 
+
+\pex \label{ex2}
+\a \label{ex2a} *Which articles did you say [\gap{} got filed by John [without him reading \gap{}]]?
+\a \label{ex2b} Which Caesar did Brutus imply [\gap{} was no good] [while ostensibly praising \gap{}?]
+\xe
+
+While both examples are superficially similar, they differ with respect to the attachment site of the adverbial phrase. In (\ref{ex2a}), the adverbial falls within the c-command domain of the embedded subject gap; in (\ref{ex2b}), the adverbial is attached to the higher matrix verb and is thereby not c-commanded by the subject gap. The structural difference is illustrated below:
+
+\vspace{\baselineskip}
+
+\TwoTreeCols
+{%
+  (\ref{ex2a}): Adverbial inside embedded clause%
+
+  \vspace{0.6\baselineskip}
+  \centering
+  \begin{forest}
+  for tree={
+    scale=0.70,
+    parent anchor=south,
+    child anchor=north,
+    align=center,
+    base=bottom,
+    inner sep=2pt,
+    s sep=7mm,
+    l sep=5mm,
+    anchor=center,
+  }
+  [CP
+    [{Which articles$_i$}]
+    [\ldots
+      [VP
+        [V\\say]
+        [CP
+          [TP
+            [$t_i$]
+            [T$'$
+              [T]
+              [VP
+                [VP [{got filed by John}, roof]]
+                [AdvP [{without reading \textit{pg}$_i$}, roof]]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+  \end{forest}
+}
+{%
+  (\ref{ex2b}): Adverbial adjoined to matrix VP%
+
+  \vspace{0.6\baselineskip}
+  \centering
+  \begin{forest}
+  for tree={
+    scale=0.70,
+    parent anchor=south,
+    child anchor=north,
+    align=center,
+    base=bottom,
+    inner sep=2pt,
+    s sep=7mm,
+    l sep=5mm,
+    anchor=center,
+  }
+  [CP
+    [{Which Caesar$_i$}]
+    [\ldots
+      [VP
+        [VP
+          [V\\imply]
+          [CP
+            [TP
+              [$t_i$]
+              [T$'$
+                [T]
+                [VP [{was no good}, roof]]
+              ]
+            ]
+          ]
+        ]
+        [AdvP [{while praising \textit{pg}$_i$}, roof]]
+      ]
+    ]
+  ]
+  \end{forest}
+}
+
+\vspace{\baselineskip}
+
+\noindent From contrasts like these, Engdahl proposes the ACC condition: \textit{parasitic gaps may not be c-commanded by their licensing gap}.
+
+Further support for this proposal comes from the distribution of PGs in preposed adverbial clauses. \citet{haegeman1984} shows that ACC can be satisfied when the surface structure is manipulated to remove the c-command relation:
+
+\pex \label{ex3}
+\a \label{ex3a} *This is the note which \gap{} will ruin our relationship unless we send \gap{} back.
+\a \label{ex3b} This is the note which, unless we send \gap{} back, \gap{} will ruin our relationship.
+\xe
+
+In (\ref{ex3a}), the embedded subject gap c-commands the PG inside the adverbial, leading to unacceptability; in (\ref{ex3b}), preposing the adverbial adjoins it high, placing the PG outside the c-command domain of the subject gap and thereby rescuing the sentence. The effect of adjunct fronting on the c-command relation is shown below:
+
+\vspace{\baselineskip}
+
+\TwoTreeCols
+{%
+  (\ref{ex3a}): Adverbial in base position%
+
+  \vspace{0.6\baselineskip}
+  \centering
+  \begin{forest}
+  for tree={
+    scale=0.70,
+    parent anchor=south,
+    child anchor=north,
+    align=center,
+    base=bottom,
+    inner sep=2pt,
+    s sep=7mm,
+    l sep=5mm,
+    anchor=center,
+  }
+  [CP
+    [{Which$_i$}]
+    [C$'$
+      [C]
+      [TP
+        [$t_i$]
+        [T$'$
+          [T]
+          [VP
+            [VP [{will ruin our relationship}, roof]]
+            [AdvP [{unless we send \textit{pg}$_i$ back}, roof]]
+          ]
+        ]
+      ]
+    ]
+  ]
+  \end{forest}
+}
+{%
+  (\ref{ex3b}): Adverbial adjoined to TP%
+
+  \vspace{0.6\baselineskip}
+  \centering
+  \begin{forest}
+  for tree={
+    scale=0.70,
+    parent anchor=south,
+    child anchor=north,
+    align=center,
+    base=bottom,
+    inner sep=2pt,
+    s sep=7mm,
+    l sep=5mm,
+    anchor=center,
+  }
+  [CP
+    [{Which$_i$}]
+    [C$'$
+      [C]
+      [TP
+        [AdvP [{unless we send \textit{pg}$_i$ back}, roof]]
+        [TP
+          [$t_i$]
+          [T$'$
+            [T]
+            [VP [{will ruin our relationship}, roof]]
+          ]
+        ]
+      ]
+    ]
+  ]
+  \end{forest}
+}
+
+\vspace{\baselineskip}
+
+\noindent From this, we have further evidence that subject gaps are not inherently barred from licensing PGs, but that the possibility of PGs depends on their structural position in relation to the licensor.
+
+Taken together, evidence of this sort has been used to motivate ACC as a necessary condition on PG licensing. If this condition is genuinely fundamental, then all well-formed parasitic gap constructions should conform to it, a prediction borne out in standard cases where the PG is located within a subject or adjunct phrase:
+
+\vspace{\baselineskip}
+
+\pex<ex4>
+
+\setbox0=\vbox{%
+  \a<A>\relax
+  \a<B>\relax
+}
+
+\TwoTreeCols
+{%
+  \getref{ex4.A} Which girl do friends of \textit{pg} embarrass \textit{t}?%
+
+  \vspace{0.6\baselineskip}
+  \centering
+  \begin{forest}
+  for tree={
+    scale=0.70,
+    parent anchor=south,
+    child anchor=north,
+    align=center,
+    base=bottom,
+    inner sep=2pt,
+    s sep=7mm,
+    l sep=5mm,
+    anchor=center,
+  }
+  [CP
+    [DP\\Which girl$_i$]
+    [C$'$
+      [C\\do]
+      [TP
+        [DP
+          [{friends of \textit{pg}$_i$}, roof]
+        ]
+        [T$'$
+          [T]
+          [VP
+            [V\\embarrass]
+            [$t_i$]
+          ]
+        ]
+      ]
+    ]
+  ]
+  \end{forest}
+}
+{%
+  \getref{ex4.B} *Which girl \textit{t} embarrassed friends of \textit{pg}?%
+
+  \vspace{0.6\baselineskip}
+  \centering
+  \begin{forest}
+  for tree={
+    scale=0.70,
+    parent anchor=south,
+    child anchor=north,
+    align=center,
+    base=bottom,
+    inner sep=2pt,
+    s sep=7mm,
+    l sep=5mm,
+    anchor=center,
+  }
+  [CP
+    [DP\\Which girl$_i$]
+    [C$'$
+      [C]
+      [TP
+        [$t_i$]
+        [T$'$
+          [T]
+          [VP
+            [V\\embarrassed]
+            [DP
+              [{friends of \textit{pg}$_i$}, roof]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+  \end{forest}
+}
+
+\xe
+
+\vspace{\baselineskip}
+
+\pex<acc_adjunct>
+
+\setbox0=\vbox{%
+  \a<A>\relax
+  \a<B>\relax
+}
+
+\TwoTreeCols
+{%
+  \getref{acc_adjunct.A} Who did John like \textit{t} after talking to \textit{pg}?%
+
+  \vspace{0.6\baselineskip}
+  \centering
+  \begin{forest}
+  for tree={
+    scale=0.70,
+    parent anchor=south,
+    child anchor=north,
+    align=center,
+    base=bottom,
+    inner sep=2pt,
+    s sep=7mm,
+    l sep=5mm,
+    anchor=center,
+  }
+  [CP
+    [DP\\Who$_i$]
+    [C$'$
+      [C\\did]
+      [TP
+        [DP\\John]
+        [T$'$
+          [T]
+          [VP
+            [VP
+              [V\\like]
+              [$t_i$]
+            ]
+            [PP
+              [{after talking to \textit{pg}$_i$}, roof]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+  \end{forest}
+}
+{%
+  \getref{acc_adjunct.B} *Who \textit{t} liked John after talking to \textit{pg}?%
+
+  \vspace{0.6\baselineskip}
+  \centering
+  \begin{forest}
+  for tree={
+    scale=0.70,
+    parent anchor=south,
+    child anchor=north,
+    align=center,
+    base=bottom,
+    inner sep=2pt,
+    s sep=7mm,
+    l sep=5mm,
+    anchor=center,
+  }
+  [CP
+    [DP\\Who$_i$]
+    [C$'$
+      [C]
+      [TP
+        [$t_i$]
+        [T$'$
+          [T]
+          [VP
+            [VP
+              [V\\liked]
+              [DP\\John]
+            ]
+            [PP
+              [{after talking to \textit{pg}$_i$}, roof]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+  \end{forest}
+}
+
+\xe
+
+\vspace{\baselineskip}
+
+The acceptable members of the pairs in (\getfullref{ex4.A}) and (\getfullref{acc_adjunct.A}) conform to ACC: in neither case is the PG c-commanded by the licensing gap. Conversely, in (\getfullref{ex4.B}) and (\getfullref{acc_adjunct.B}), the higher gap c-commands into the PG-containing domain, and the result is sharply degraded.
+
+Next, we turn to the central concern of this paper: how is ACC derived from independently motivated principles of the grammar? We will review three families of proposals: trace-based, chain-based, and semantics-based approaches.
+
+\subsection{Trace-based Account}
+Early foundational work on PGs relied on distinguishing different types of empty categories \citep{chomsky1981, chomsky1982}. Under the GB typology, empty categories are classified according to their binding properties into four types: PRO, NP-traces, variables (WH-traces), and \textit{pro}. PGs were analyzed as instances of variables, that is, as a WH-trace left behind by A$'$-movement. As such, the licensing requirements that govern variables should similarly constrain the distribution of PGs.
+
+The crucial property of variables under GB theory is that they are subject to Condition C of the binding theory. Condition C requires that R-expressions, and by extension variables, must not be A-bound. The motivation for treating variables on a par with R-expressions in this respect comes from the observation that both are referentially dependent elements that must be free in their A-binding domain. A variable, being the trace of an A$'$-moved operator, derives its reference from A$'$-binding by that operator. If a variable were instead A-bound, it would be improperly licensed: its referential dependency would be established through an A-position rather than through the A$'$-chain that created it, in violation of Condition C.
+
+From this property of variables, ACC can be derived straightforwardly. Consider the unacceptable PG sentence in (\ref{ex08}).
+
+\ex\label{ex08}{*Who \textit{t} cried after John pushed \textit{pg}?}
+\xe
+
+\noindent
+In (\ref{ex08}), the \emph{wh}-phrase \emph{who} has moved from the subject position to Spec,CP, leaving behind a trace in Spec,IP. This subject trace occupies an A-position and c-commands the PG inside the adjunct. Since the trace and the PG are coindexed, the trace A-binds the PG. But the PG, being a variable, is subject to Condition C and must not be A-bound. The A-binding relation established by the subject trace therefore renders the PG improperly licensed, and the sentence is correctly ruled out.
+
+This account predicts that ACC effects will obtain whenever the licensing gap occupies an A-position that c-commands the PG. When the licensing gap is in object position, however, the PG is typically situated outside of the object's c-command domain (e.g., inside a higher adjunct), and no Condition C violation arises. The asymmetry between subject and object gaps in PG licensing thus falls out directly from the interaction of the empty category typology with Condition C.
+
+That PGs must be A-free can be demonstrated more strongly with the next example, adapted from \citet{lasnik1988}.
+
+\ex\label{ex09}{*Who$_i$ did you hire \textit{t}$_i$ because he$_i$ said \emph{pg}$_i$ would work hard?}
+\xe
+
+\noindent
+\citet{lasnik1988} note that the object trace is presumed not to c-command the PG inside the \textit{because}-clause, and yet the sentence is still unacceptable. However, the PG is nonetheless A-bound by the pronoun \textit{he}, and this is taken as the reason the PG fails to be licensed. From this example, we see that ACC is simply a consequence of a more fundamental property of PGs: they must be A-free. 
+
+Within GB theory, this trace-based account successfully derives ACC in all the standard PG cases. Once we adopt the copy theory of movement, however, this approach becomes less appealing. Specifically, once the copy theory is adopted, we no longer have a principled reason to distinguish variables from NP-traces. Both would simply be copies of the moved constituent. This is crucial because NP-traces, as opposed to variables, are A-bound. In passives, for instance, the subject A-binds its $\theta$-position.
+
+\ex\label{ex01}{John$_1$ was contacted \textit{t}$_1$}.
+\xe
+
+In (\ref{ex01}), \textit{John} A-binds the NP-trace positioned as the complement of \textit{contacted}. However, for this analysis to work we must distinguish NP-traces from variables as syntactic primitives. Given Minimalist assumptions and the copy theory of movement, this distinction can no longer be easily stated. As such, while it may be true that PGs cannot be A-bound, under the copy theory of movement this generalization is no longer predicted by the grammar.
+
+For the remainder of this paper, we will be assuming the copy theory of movement and will have little to add regarding the trace-based account of ACC. 
+
+\subsection{Chain-based Account}
+
+An alternative approach to deriving ACC is developed by \cite{nunes2004}, who replaces the trace-based apparatus with an account grounded in the copy theory of movement and the requirements of phonological linearization. On this view, movement leaves behind full copies of the moved element, and the grammar must subsequently determine which copies are pronounced and which are deleted. \cite{nunes2004} argues that this process of \textit{chain reduction} is constrained by Kayne's \citeyearpar{kayne1994} Linear Correspondence Axiom (LCA), and that the interaction between chain formation, chain reduction, and linearization derives ACC without appeal to Condition C or the empty category typology.
+
+Before turning to how ACC is derived under this system, several background assumptions must be made explicit. First, the LCA requires that asymmetric c-command relations among terminal nodes map onto a total linear ordering. When a movement chain contains multiple copies of the same element, these nondistinct copies induce violations of the asymmetry and irreflexivity conditions on linear order, preventing the structure from being linearized. To resolve this, the grammar applies chain reduction, which \cite{nunes2004} defines as follows: delete the minimal number of constituents of a nontrivial chain CH that suffices for CH to be mapped into a linear order in accordance with the LCA. Crucially, chain reduction applies only to \textit{nontrivial chains}, that is, chains that have at least two links. Single link chains are treated as a trivial chains, and chain reduction does not apply.
+
+Second, in \cite{nunes2004}'s account, two terms can form a chain only if they are nondistinct and stand in a c-command relation. Additionally, chain formation is subject to the Minimal Link Condition (MLC) and Last Resort. If a closer potential chain link intervenes, the MLC blocks chain formation with a more distant copy. And furthermore, displacement of a nondistinct copy must be motivated through Last Resort by the need to check an uninterpretable feature in order for chain formation to apply between the displaced and original copies.  
+
+In addition to these assumptions about chain formation and linearization, \citeauthor{nunes2004}'s analysis of PGs centrally depends on the availability of \textit{sideward movement}. Under the Copy+Merge theory, standard movement involves copying an element from within a single syntactic object and remerging it at the root of that same object. Sideward movement extends this: the computational system copies an element from one syntactic object and merges it into a \textit{different} syntactic object that is assembled in a separate workspace. This is illustrated schematically in (\ref{ex_sm1})--(\ref{ex_sm3}).
+
+\ex \label{ex_sm1} \textbf{Step 1.} Two syntactic objects K and L are constructed in parallel. K contains a copy of $\alpha$.
+
+\begin{forest}
+for tree={
+  scale=0.80,
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=12mm,
+  l sep=10mm,
+  anchor=center,
+}
+[,phantom, s sep=30mm
+  [K
+    [{$\ldots$ $\alpha^i$ $\ldots$}, roof]
+  ]
+  [L
+    [{$\ldots$}, roof]
+  ]
+]
+\end{forest}
+\xe
+
+\ex \label{ex_sm2} \textbf{Step 2.} $\alpha$ is copied from K and merged with L (sideward movement).
+
+\begin{forest}
+for tree={
+  scale=0.80,
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=12mm,
+  l sep=10mm,
+  anchor=center,
+}
+[,phantom, s sep=30mm
+  [K
+    [{$\ldots$ $\alpha^i$ $\ldots$}, roof]
+  ]
+  [M
+    [$\alpha^i$]
+    [L
+      [{$\ldots$}, roof]
+    ]
+  ]
+]
+\end{forest}
+\xe
+
+\noindent
+At this stage, the two copies of $\alpha$ are contained within separate syntactic objects and do not stand in a c-command relation. As such, chain formation does not take place. 
+
+\ex \label{ex_sm3} \textbf{Step 3.} K and M are unified into a single syntactic object. A head Y, introduced later in the derivation, requires a copy of $\alpha$, triggering further movement to Spec,YP.
+
+\begin{forest}
+for tree={
+  scale=0.80,
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=12mm,
+  l sep=10mm,
+  anchor=center,
+}
+[YP
+  [$\alpha^i$]
+  [Y$'$
+    [Y]
+    [M
+      [K
+        [{$\ldots$ $\alpha^i$ $\ldots$}, roof]
+      ]
+      [M
+        [$\alpha^i$]
+        [L
+          [{$\ldots$}, roof]
+        ]
+      ]
+    ]
+  ]
+]
+\end{forest}
+\xe
+
+\noindent
+Once the two objects are unified and $\alpha$ moves to Spec,YP, the highest copy c-commands both lower copies. Importantly, since neither of the lower copies c-commands the other, the MLC does not apply and the highest copy can form a chain with each of them independently. Chain reduction can then delete both lower links, yielding a well-formed PF output in which $\alpha$ appears to have moved from two different launching sites. This is the derivational basis for PG constructions under the sideward movement approach.
+
+With these assumptions in hand, let us consider how \cite{nunes2004} derives ACC. In the trees that follow, each copy of the \emph{wh}-phrase is annotated with its wh-feature, which will relevant to chain formation due to the MLC. A feature in small caps (e.g., \textsc{wh}) indicates that the feature has been checked in the course of the derivation; a feature in bold (e.g., \textbf{wh}) indicates that it remains unchecked. 
+
+Consider first the acceptable adjunct PG in (\ref{ex_chain1}).
+
+\ex \label{ex_chain1}
+Which paper did John file \gap{} before reading \gap{}?
+\xe
+
+\noindent
+Under \citeauthor{nunes2004}'s analysis, the derivation of (\ref{ex_chain1}) proceeds by sideward movement of \emph{which paper} from the adjunct clause into the matrix object position of \emph{file}. After the two syntactic objects are unified and all movement operations are complete, the structure contains three copies of \emph{which paper}, as shown in (\ref{ex_chain1_tree}).
+
+\ex \label{ex_chain1_tree}
+\begin{forest}
+for tree={
+  scale=0.75,
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=7mm,
+  l sep=10mm,
+  anchor=center,
+}
+[CP
+  [{[which paper]$^1$-\textsc{wh}}, name=copy1]
+  [C$'$
+    [C\\did+Q]
+    [TP
+      [DP\\John]
+      [T$'$
+        [T]
+        [vP
+          [{file [which paper]$^2$\textbf{-wh}}, roof, name=copy2]
+          [{before PRO reading [which paper]$^3$\textbf{-wh}}, roof, name=copy3]
+        ]
+      ]
+    ]
+  ]
+]
+\end{forest}
+\xe
+
+\noindent
+The highest copy (copy$^1$) in Spec,CP c-commands both lower copies. Crucially, copy$^2$ and copy$^3$, each with an unchecked wh-feature, do not c-command each other. Neither copy therefore blocks the other from forming a chain with copy$^1$. The highest copy forms two chains: CH$_1$ = (copy$^1$, copy$^2$) and CH$_2$ = (copy$^1$, copy$^3$). Optimal chain reduction then deletes the lower link of each chain, and the structure can be linearized.
+
+Now consider the unacceptable case in (\ref{ex_chain2}).
+
+\ex \label{ex_chain2}
+*Which man \gap{} called before John met \gap{}?
+\xe
+
+\noindent
+In (\ref{ex_chain2}), the \emph{wh}-phrase \emph{which man} serves as the matrix subject, while the PG appears as the object of \emph{met} inside the adjunct. Under sideward movement, \emph{which man} originates inside the adjunct as the internal argument of \emph{met} and sideward merges as the external argument of the matrix verb \emph{called}. After all movement operations are complete, the structure contains four copies of \emph{which man}, as shown in (\ref{ex_chain2_tree}).
+
+\ex \label{ex_chain2_tree}
+\begin{forest}
+for tree={
+  scale=0.75,
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=7mm,
+  l sep=10mm,
+  anchor=center,
+}
+[CP
+  [{[which man]$^1$-\textsc{wh}}, name=copy1]
+  [C$'$
+    [C]
+    [TP
+      [{[which man]$^2$-\textbf{wh}}, name=copy2]
+      [T$'$
+        [T]
+        [vP
+          [{[which man]$^3$-\textbf{wh} called}, roof, name=matrixvP]
+          [{before John met [which man]$^4$-\textbf{wh}}, roof, name=copy4]
+        ]
+      ]
+    ]
+  ]
+]
+\end{forest}
+\xe
+
+\noindent
+The highest copy (copy$^1$) in Spec,CP must form chains with the lower copies so that they may be deleted by chain reduction. As in regular subject movement, copy$^3$ (in Spec,vP) can form a chain with copy$^2$, which in turn forms a chain with copy$^1$, yielding the linked chain CH = (copy$^1$, copy$^2$, copy$^3$). However, copy$^4$ inside the adjunct cannot be incorporated into a nontrivial chain. Let us consider why.
+
+First, can copy$^4$ form a chain directly with copy$^1$? Although copy$^1$ c-commands copy$^4$, the MLC blocks this: copy$^2$ is closer to copy$^1$ than copy$^4$ is (where closeness is defined in terms of c-command), and copy$^2$ bears the same unchecked wh-feature relevant for movement to Spec,CP. Copy$^2$ therefore intervenes, preventing copy$^4$ from forming a chain with copy$^1$.
+
+The remaining possibility is for copy$^4$ to form a chain with copy$^2$, which does c-command it. However, as noted, \citet{nunes2004} requires chain formation to involve a feature-checking relation between the two links. Copy$^2$ sits in Spec,TP, having been attracted there by T's probe for an unchecked Nominative Case feature. Copy$^4$, however, bears an unchecked Accusative Case feature, since it occupies an object position inside the adjunct clause. Because copy$^4$'s Case feature does not match the feature that T probes for, copy$^4$ is not a suitable goal for T. No feature-checking relation is established between copy$^2$ and copy$^4$, and chain formation therefore does not apply.
+
+The result is that copy$^4$ remains unchained. Since it does not belong to a nontrivial chain, chain reduction cannot target it. This unchained copy then induces violations of the asymmetry and irreflexivity conditions on linear order, preventing the structure from being linearized and canceling the derivation. The sentence in (\ref{ex_chain2}) is thereby correctly ruled out.
+
+The general pattern that emerges is this: when neither the licensing gap nor any intermediate link in the chain containing it c-commands the PG, both lower copies can independently form chains with the highest copy and be deleted by chain reduction, yielding a convergent derivation. When the licensing gap or one of its intermediate chain links does c-command the PG, the conditions on chain formation (the MLC and feature-checking requirements) prevent the PG copy from being incorporated into a chain, and the unchained copy causes the derivation to crash at PF. As such, the ACC generalization is accounted for.  
+
+While this approach successfully derives ACC using independently motivated mechanisms, it faces an empirical challenge when confronted with complement-clause PGs, as we will see in Section 2.4.
+
+\subsection{Semantics-based Account}
+
+A third approach to deriving ACC comes from the semantics of PG constructions. \cite{nissenbaum2000} develops an account in which PGs are licensed through the compositional interpretation of null operator structures, and in which ACC follows from the structural requirements of predicate modification.
+
+The starting point of Nissenbaum's analysis is the null operator hypothesis for PGs \citep{chomsky1986}. On this view, the PG is not a copy of the overt wh-phrase, but is instead the trace of a separate null operator that moves within the island domain. This null operator movement creates a predicate-adjunct, a constituent of type $\langle e,t \rangle$ whose open argument position corresponds to the PG. For example, in a sentence like (\ref{ex_sem1}), the adjunct \textit{without reading} is analyzed as involving null operator movement, yielding the structure in (\ref{ex_sem1_tree}):
+
+\ex \label{ex_sem1}
+Which book did John file \gap{} without reading \gap{}?
+\xe
+
+\ex \label{ex_sem1_tree}
+\begin{forest}
+for tree={
+  scale=0.80,
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=7mm,
+  l sep=8mm,
+  anchor=center,
+}
+[Adjunct
+  [Op$_j$]
+  [{without PRO reading $t_j$}, roof]
+]
+\end{forest}
+\xe
+
+\noindent
+Null operator movement from the position of the gap to the edge of the adjunct clause creates a derived predicate: a one-place function that can be represented as $\lambda x$.\textit{without reading} $x$. This is the same kind of structure found in relative clauses, where movement of a (possibly null) relative operator creates a predicate that modifies a noun phrase.
+
+The key question is how this predicate-adjunct composes with the rest of the sentence. \citeauthor{nissenbaum2000} argues that the answer lies in the interaction between movement and semantic interpretation. On this view, successive-cyclic A$'$-movement targets every vP along the way to its final landing site. When a wh-phrase passes through the specifier of vP, the trace (or intermediate copy) it leaves behind introduces a variable, and predicate abstraction over that variable yields a one-place function of type $\langle e,t \rangle$. The vP from which the wh-phrase has moved is thereby interpreted as a derived predicate. The adjunct containing the PG, itself a predicate formed by null operator movement, adjoins as a sister to this vP and the two compose via predicate modification \citep{heim1998}. This is illustrated in (\ref{ex_sem2}) for a sentence like (\ref{ex_sem1}):
+
+\ex \label{ex_sem2}
+\begin{forest}
+for tree={
+  scale=0.75,
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=7mm,
+  l sep=8mm,
+  anchor=center,
+}
+[CP
+  [{which book}$_i$]
+  [C$'$
+    [C]
+    [TP
+      [John]
+      [T$'$
+        [T]
+        [vP
+          [$t_i$, name=ti]
+          [vP
+            [{$\ldots$file $t_i$}, roof]
+            [Adjunct
+              [{Op$_j$ without reading $t_j$}, roof]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+]
+\end{forest}
+\xe
+
+\noindent
+The intermediate trace $t_i$ in Spec,vP is the reflex of successive-cyclic movement through this position. Its presence triggers predicate abstraction over the lower vP, creating a derived predicate ($\lambda x$.\textit{file} $x$) that can compose with the adjoined predicate-adjunct ($\lambda x$.\textit{without reading} $x$) via predicate modification, yielding a conjoined property: $\lambda x$.\textit{file} $x$ \textit{and without reading} $x$. This conjoined predicate then enters a predicate-argument relation with the raised wh-phrase.
+
+The crucial observation is that predicate modification requires the two composing constituents to be \textit{sisters}. The adjunct containing the PG must therefore be a sister to the vP containing the licensing gap. This sisterhood requirement directly derives the ACC condition: because the adjunct is adjoined to the lower vP, that is, \textit{below} the landing site of the moved wh-phrase, the trace of the licensing movement is contained \textit{inside} the lower vP and therefore does not c-command the adjunct or the PG within it. The PG-containing phrase is structurally outside the c-command domain of the licensing gap, exactly as ACC requires.
+
+While this account elegantly unifies PG licensing with independently motivated principles of semantic composition, it too faces an empirical challenge from complement-clause PGs, as we discuss next.
+
+\subsection{Complement-clause PGs and ACC}
+All three of the preceding accounts successfully derive the ACC condition for PGs that appear in adjunct and subject islands. However, each faces a shared empirical challenge from a class of multiple-gap constructions in which the lower gap appears inside a complement clause. In such sentences, the matrix verb takes both a DP object and a CP complement, and extraction of a wh-phrase leaves gaps in both positions. Consider the example in (\ref{ex5}), with its associated simplified structure:
+
+\ex \label{ex5} Who did John inform \textit{t} that he would hire \textit{pg}?
+\newline
+\newline
+\begin{forest}
+for tree={
+  scale=0.80,
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=7mm,
+  l sep=5mm,
+  anchor=center,
+}
+[CP
+  [DP\\Who$_i$]
+  [\ldots
+    [VP
+      [\textit{t}$_i$]
+      [V$'$
+        [V\\inform]
+        [CP
+          [{that $\ldots$ hire \textit{pg}$_i$}, roof]
+        ]
+      ]
+    ]
+  ]
+]
+\end{forest}
+\xe
+\noindent
+The sentence in (\ref{ex5}) appears to violate ACC: as the tree makes clear, the matrix object gap c-commands into the complement CP, and therefore c-commands the lower gap. Despite this, the sentence is fully acceptable. This result is unexpected under any of the accounts discussed to this point.
+
+It can be further noted that in cases like (\ref{ex5}), the lower gap is not ``parasitic'' in the usual sense, since it is not strictly dependent on the presence of the higher gap. Either position can be filled without loss of acceptability:
+
+\pex \label{ex6}
+\a Who did John inform Mary that he would hire \gap{} ?
+\a Who did John inform \gap{} that he would hire Mary ? 
+\xe
+
+Nevertheless, complement-clause multiple-gap constructions have frequently been subsumed under the broader parasitic gap paradigm. For our purposes, the important point is that parasitism itself is not what has been claimed to motivate the ACC condition; rather, as we have seen, ACC has been argued to arise due to constraints on variable licensing, chain formation, or predication. Such constraints would still apply to cases like (\ref{ex5}), and therefore an explanation is needed.
+
+An early account of sentences like (\ref{ex5}) proposes that, although the lower gap is superficially c-commanded by its licensor, it nonetheless falls outside the relevant c-command domain \citep{chomsky1986}. On this view, ACC is preserved through a more complete description of the configurational properties of binding domains. To our knowledge, this sort of analysis has not been fully explored in relation to complement-clause PGs, but it reflects the intuition that structural distance, rather than c-command per se, is central to capturing the distribution of PGs. 
+
+However, if the lower gap in (\ref{ex5}) truly falls outside the c-command domain of the higher gap, then we would predict an absence of Condition C effects in this configuration. This expectation, however, does not appear to be borne out. As \cite{stowell1985} observes, when the higher position is occupied by a pronoun and the lower position contains a co-referring R-expression, the result is ungrammatical, suggesting that the relevant c-command relation is indeed present:
+
+\ex \label{ex7}
+*I convinced him$_i$ that I would be happy to visit John$_i$. 
+\xe
+
+This pattern suggests that the lower position is bound by the higher pronominal and therefore poses a challenge to the c-command domain account of complement-clause PGs. 
+
+To understand why complement-clause PGs are problematic, it is useful to identify what the chain-based and semantics-based accounts have in common. Despite their theoretical differences, both approaches derive the ACC condition from the same underlying structural configuration: in standard PG sentences, the domain containing the PG is a \textit{sister} to the domain containing the licensing gap. This sisterhood relation is crucial to both accounts. Under the chain-based account, sisterhood allows for the highest copy in Spec,CP to form separate chains with both the licensing gap copy and the PG copy. Because the two lower copies occupy non-c-commanding domains, neither blocks chain formation with the other. Without this sisterhood, one of the lower copies would c-command the other, and chain formation with the more deeply embedded copy would be blocked, either by the MLC or by the absence of a suitable feature-checking relation between the intervening copy and the PG copy. Under the semantics-based account, sisterhood is what allows the PG-containing adjunct and the vP to compose via predicate modification. In both cases, the derivation of ACC depends on the PG-containing phrase and the licensing-gap-containing phrase standing in a sisterhood relation.
+
+This structural configuration is illustrated schematically in (\ref{ex_sister1}) for a standard adjunct PG. The adjunct is adjoined as a sister to the lower vP, and the licensing gap (the trace of the wh-phrase) is contained inside this same vP. Because the adjunct is a sister to the vP rather than being dominated by it, the trace inside the vP does not c-command the adjunct or the PG within it:
+
+\ex \label{ex_sister1}
+\begin{forest}
+for tree={
+  scale=0.80,
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=8mm,
+  l sep=8mm,
+  anchor=center,
+}
+[vP
+  [$t_i$]
+  [vP
+    [{$\ldots$read $t_i$}, roof]
+    [Adjunct
+      [{Op$_j$ before filing $t_j$}, roof]
+    ]
+  ]
+]
+\end{forest}
+\xe
+
+\noindent
+Complement-clause PGs disrupt this configuration. In sentences like (\ref{ex5}), the CP containing the lower gap is not an adjunct adjoined as a sister to vP. Rather, it is a \textit{complement} of V, embedded inside the VP that also contains the licensing gap. The two gap-containing domains therefore do not stand in a sisterhood relation; instead, the VP containing the licensing gap \textit{dominates} the CP containing the lower gap. This is shown schematically in (\ref{ex_sister2}):
+
+\ex \label{ex_sister2}
+\begin{forest}
+for tree={
+  scale=0.80,
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=8mm,
+  l sep=8mm,
+  anchor=center,
+}
+[vP
+  [$t_i$]
+  [v$'$
+    [v]
+    [VP
+      [$t_i$, name=matrixgap]
+      [V$'$
+        [V\\inform]
+        [CP, name=embCP
+          [{that he would hire $t_i$}, roof]
+        ]
+      ]
+    ]
+  ]
+]
+\end{forest}
+\xe
+
+\noindent
+The contrast between (\ref{ex_sister1}) and (\ref{ex_sister2}) makes the problem clear. In (\ref{ex_sister1}), the adjunct and the lower vP are sisters, and the licensing gap inside the vP does not c-command the adjunct. In (\ref{ex_sister2}), the CP is a complement of V, buried inside the VP: the matrix object gap c-commands into the CP, and no sisterhood obtains between the two gap-containing domains. This absence of sisterhood is fatal for both accounts. For the chain-based account, the derivation should fail for the same reasons observed for (\ref{ex_chain2}); for the semantics-based account, the CP and the vP are not sisters and therefore cannot compose via predicate modification. Yet the sentence is grammatical, contrary to what either account predicts. This raises the question of whether complement-clause PGs can be reconciled with these accounts through additional structural assumptions, or whether ACC itself must be reconsidered.
+
+One recent attempt to reconcile complement-clause PGs with ACC is advanced by \cite{arregi2022}. The core idea is that if the embedded CP were to undergo extraposition, moving from its base-generated complement position to a position adjoined to the vP containing the licensing gap, then the sisterhood relation that both the chain-based and semantics-based accounts require would be restored. \citeauthor{arregi2022} develop this proposal in the context of \citeauthor{nissenbaum2000}'s \citeyearpar{nissenbaum2000} derived predication account, but as we will see, the same structural repair would in principle benefit the chain-based account as well. The proposed extraposed structure is shown in (\ref{ex10}).
+
+\ex \label{ex10}
+\begin{forest}
+for tree={
+  scale=0.80,
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=8mm,
+  l sep=8mm,
+  anchor=center,
+}
+[vP
+  [vP
+    [$t_i$]
+    [v$'$
+      [v]
+      [VP
+        [$t_i$]
+        [V$'$
+          [V\\inform]
+          [$t_j$, name=tj]
+        ]
+      ]
+    ]
+  ]
+  [CP$_j$, name=cpj
+    [{\textit{Op}$_k$ that he would hire \textit{pg}$_k$}, roof]
+  ]
+]
+\draw[thick]
+  (tj.north east) .. controls +(5.0,2.8) and +(2.5,0.0) .. ([xshift=12pt,yshift=-8pt]cpj.north);
+\end{forest}
+
+\xe
+
+On this analysis, extraposition moves the complement CP out of its base position inside VP and adjoins it as a sister to the vP containing the licensing gap. Comparing (\ref{ex10}) with (\ref{ex_sister2}), the structural change is clear: the CP is no longer embedded inside V$'$, dominated by the VP that contains the licensing gap. Instead, it occupies a position that is a sister to the vP, exactly parallel to the configuration of an adjunct PG in (\ref{ex_sister1}).
+
+This structural repair benefits both accounts. For the semantics-based account, extraposition restores the sisterhood relation that predicate modification requires: the extraposed CP, containing a null operator chain, is now a sister to the vP, and the two can compose as predicates of type $\langle e,t \rangle$. For the chain-based account, extraposition similarly resolves the problem. Once the CP is adjoined to vP rather than embedded inside it, the matrix object gap no longer c-commands the copy inside the CP. The two copies are now in separate, non-c-commanding domains, precisely the configuration in which the adjunct copy can independently form a chain with the highest copy and be deleted by chain reduction, yielding a convergent derivation. In both cases, extraposition transforms the problematic complement-clause configuration into one that is structurally equivalent to a standard adjunct PG, and ACC is preserved.
+
+The extraposition analysis receives some empirical support from the phenomenon of complementizer drop. \cite{safir1987} notes that the acceptability of complement-clause PGs appears to degrade when the complementizer is omitted, as shown in (\ref{ex11}):
+
+\ex \label{ex11}
+Who did you persuade \gap{} [??(that) we should visit \gap{}] ?
+\xe
+
+\noindent
+This pattern is expected if the complement CP has been extraposed. \cite{stowell1981} argues that null complementizers must be properly governed by the verb. Extraposition of the CP disrupts this government relation, blocking complementizer drop. More recently, \cite{boskovic2003}, building on \cite{pesetsky1992}, proposes that CP complements headed by a null complementizer involve C-to-V movement, affixing the null C head to the verb. When the CP has been extraposed, the affixed C head no longer c-commands its trace and the null C is therefore not licensed. On either account, the degradation observed in (\ref{ex11}) when \textit{that} is omitted is consistent with extraposition having applied.
+
+However, the success of the extraposition analysis crucially depends on the robustness of the contrast reported in (\ref{ex11}). In Section 3, we present evidence from an acceptability judgment task that challenges the claim that complementizer drop degrades sentences containing a complement-clause PG. If this contrast does not hold up, the empirical motivation for positing extraposition is substantially weakened, and the apparent violation of ACC in complement-clause PGs remains unexplained.
+
+\section{Testing Complement-Clause PGs}
+
+In this section, we present the results of an acceptability judgment experiment designed to test whether the licensing of complement-clause PGs requires adherence to the anti-c-command condition. As discussed in Section 2.4, \cite{arregi2022} argue that complement-clause PGs involve extraposition of the CP complement, which removes the PG from the c-command domain of the licensing gap. If extraposition is necessary for licensing, we expect complementizer drop to result in similar levels of unacceptability regardless of whether extraposition is forced by the presence of an intervening adverbial. A second experiment examining prepositional dative PGs is presented in Section 4.4, where the theoretical analysis of those constructions is developed.
+
+\subsection{Acceptability Judgment Task}
+
+\cite{arregi2022} argue that complement‑clause PGs involve extraposition of the CP complement, based on contrasts like (\ref{ex13}). Under their account, CP extraposition removes the PG from the c-command domain of the licensing gap, preserving the anti‑c-command condition. This analysis makes a key prediction: if CP extraposition is necessary, then complementizer drop should result in similar unacceptability regardless of whether extraposition is forced by other factors, such as an intervening adverbial.
+
+\ex \label{ex13} (= (\ref{ex11}))
+Who did you persuade \gap{} [??(that) we should visit \gap{}]?
+\xe
+
+
+The status of this contrast remains uncertain, however, and further testing is needed to determine if this argument is empirically supported. To this end, we tested 24 sets of complement‑clause PG sentences in an acceptability‑judgment task in which we systematically manipulated two factors: complementizer presence (\textit{that} vs. null complementizer) and CP adjacency to the verb (no intervening adverbial vs. forced extraposition via an intervening adverbial). When an intervening adverbial is present, the CP is necessarily extraposed. Therefore, if CP extraposition is required for PG licensing, we predict that (i) sentences without an intervening adverbial should degrade when the complementizer is dropped, and (ii) sentences with an intervening adverbial should show a similar level of degradation when the complementizer is null. A sample item set is given in (\ref{ex14}). Participants also rated 96 filler items of comparable complexity.
+
+\pex \label{ex14} Sample item set (complementizer presence $\times$ CP adjacency)
+\a \emph{that} / no adverbial \\
+Which employee did Kevin promise \underline{that} he would hire \textbf{during the interview?}
+\a null complementizer / no adverbial \\
+Which employee did Kevin promise he would hire \textbf{during the interview?}
+\a \emph{that} / adverbial \\
+Which employee did Kevin promise \textbf{during the interview} \underline{that} he would hire?
+\a null complementizer / adverbial \\
+Which employee did Kevin promise \textbf{during the interview} he would hire?
+\xe
+
+\subsubsection{Statistical analysis}
+
+To evaluate whether the anti‑c-command condition is a necessary constraint on PG licensing, we conducted an ordinal‑logistic regression analysis using acceptability judgments as the dependent variable. The independent variables were \textit{complementizer presence} (\textit{that} vs. null) and \textit{CP adjacency} (no intervening adverbial vs. intervening adverbial), which were contrast‑coded as $\pm0.5$. An interaction term was included to assess whether the effect of complementizer presence varied as a function of extraposition. Data from 45 native speakers of English were analyzed.
+
+\subsubsection{Main Effect}
+The analysis revealed a significant main effect of complementizer presence: sentences without \textit{that} received higher acceptability ratings than those in which \textit{that} was overtly present ($\beta = -1.375$, $SE = 0.538$, $z = -2.554$, $p = 0.011$). This effect was robust across multiple levels of the acceptability scale ($\beta = -1.080$, $p = 0.032$ for rating = 5; $\beta = -1.067$, $p = 0.032$ for rating = 6). These results challenge the assumption that extraposition is required for licensing complement‑clause PGs, as \textit{that}-presence does not appear to facilitate acceptability.
+
+In contrast, no significant main effect of extraposition was observed ($\beta = -0.882$, $SE = 0.538$, $z = -1.639$, $p = 0.101$), suggesting that acceptability judgments do not vary systematically depending on whether the CP is forced to extrapose.
+
+\subsubsection{Interaction Effects}
+We next tested whether the effect of complementizer presence interacted with complementizer adjacency. The interaction term did not reach significance in most cases ($p > 0.1$), indicating that the impact of \textit{that} on acceptability does not systematically differ based on whether the CP is extraposed. However, a marginal interaction effect was observed at the highest acceptability level ($\beta = 1.652$, $SE = 0.984$, $z = 1.679$, $p = 0.093$ for rating = 7), suggesting a weak trend in which the presence of \textit{that} may slightly improve acceptability only at the highest rating level.
+
+\subsubsection{Discussion}
+These results do not provide empirical support for the extraposition analysis of complement-clause PGs. If extraposition of the complement CP were necessary to satisfy anti-c-command, we would expect systematic degradation in acceptability when the complementizer is dropped, regardless of whether extraposition is forced by an intervening adverbial. Instead, we observed the opposite pattern: sentences without \textit{that} are rated more acceptable than those with it. This is unexpected under the extraposition account, which predicts that complementizer drop should be dispreferred precisely because it is incompatible with the extraposition that is supposed to be required for PG licensing. The absence of this predicted degradation suggests that extraposition is not a necessary component of complement-clause PG constructions, and the challenge that these constructions pose for accounts deriving ACC from a sisterhood relation (as discussed in Section 2.4) remains unresolved.
+
+In the next section, we develop an alternative analysis of PGs that does not require extraposition to account for complement-clause PGs. This account appeals to sideward movement \citep{nunes2000, nunes2004}, Multiple Spell-Out \citep{uriagereka1999}, and general locality-based constraints on movement. We show that this approach captures the standard cases of subject and adjunct PGs while also accommodating complement-clause PGs without additional structural assumptions. Additional experimental evidence from prepositional dative PGs is presented in Section 4.4.
+
+\section{An Alternative Proposal}
+
+The preceding sections have shown that existing accounts of the anti-c-command condition, whether trace-based, chain-based, or semantics-based, successfully derive ACC effects in canonical adjunct and subject PGs. However, as discussed in Section 2.4, complement-clause PGs remain a persistent challenge for each of these approaches. The acceptability of sentences in which the licensing gap c-commands the PG inside a complement clause is unexpected under any account that derives ACC from a sisterhood relation between the PG-containing domain and the licensing-gap-containing domain, and the experimental results in Section 3 provide no evidence that extraposition resolves this tension.
+
+In what follows, we develop an alternative analysis that aims to capture the standard ACC effects while also correctly predicting the acceptability of complement-clause PGs. The account derives these results from the interaction of Merge, sideward movement, and the timing of Spell-Out. On this approach, the ACC emerges as a consequence of how derivations unfold.
+
+The analysis we present builds on the framework developed by \cite{nunes2000}, who show that PGs can be derived from the interaction of sideward movement \citep{nunes2004} and Multiple Spell-Out \citep{uriagereka1999}. Before turning to the analysis itself, we lay out the key theoretical assumptions in detail.
+
+\paragraph{The copy theory of movement.} We adopt the copy theory of movement \citep{chomsky1995}, under which Move does not leave behind a phonetically empty trace but rather a full copy of the moved element. Movement is decomposed into three suboperations: (i) copying of a syntactic object, (ii) merging the copy into a new position, and (iii) deletion of lower copies in the phonological component for purposes of linearization. The lower copies remain present in the narrow syntax and at LF; only at PF are they deleted.
+
+The copy theory interacts directly with the LCA, which requires that all terminal elements in a syntactic structure be mapped to a total linear order at PF. Multiple nondistinct copies of the same element cannot be simultaneously linearized, because the LCA would require a single element to both precede and follow itself. Chain reduction, the deletion of lower copies, resolves this conflict. As discussed in Section 2.2, this interaction between copy theory and linearization is what drives the chain-based account of PGs. We assume that chain reduction proceeds in a similar manner as described by \cite{nunes2004}.
+
+\paragraph{Sideward movement.} As discussed in Section 2.2, the copy theory decomposes Move into copying and merging, which need not target the same syntactic object. \cite{nunes2004} argues that the computational system permits \textit{sideward movement}: a constituent in one syntactic object K can be copied and merged into a separate, unconnected syntactic object L. Sideward movement is constrained by the same economy conditions that govern standard movement: it must be driven by Last Resort and is subject to the Minimal Link Condition.
+
+\paragraph{Multiple Spell-Out and command units.} A central component of the present analysis is \citeauthor{uriagereka1999}’s \citeyearpar{uriagereka1999} Multiple Spell-Out (MSO) model. The key insight of MSO is that Spell-Out need not apply only once at the end of a derivation; rather, economy considerations may force the computational system to apply Spell-Out multiple times in the course of building a single sentence.
+
+The motivation comes from the LCA and the structure of Merge. \citeauthor{uriagereka1999} defines a \textit{command unit} as a syntactic object formed by the continuous application of Merge to the same growing structure. That is, if we begin with a head X and successively merge elements into the phrase it projects, the resulting object is a single command unit. All terminal elements within a command unit stand in asymmetric c-command relations with one another and can therefore be straightforwardly linearized by the LCA. This is the case for the complement domain of a head: the verb and its complement are assembled within the same command unit and can be directly linearized.
+
+The situation is different for complex noncomplements, that is, phrasal subjects and adjuncts. These constituents are not built by merging elements directly into the CU that contains the selecting head. Instead, they must be assembled in their own independent workspaces. Consider the structure of a simple transitive sentence with a complex subject, as in (\ref{ex_mso1}):
+
+\ex \label{ex_mso1}
+Pictures of John upset the voters.
+\xe
+
+\noindent
+The VP \textit{upset the voters} is assembled as a single CU. But the subject \textit{pictures of John} cannot be built within this same CU; it is constructed in a separate derivational workspace. Before the subject can merge with the main clausal spine, the LCA must be able to linearize the combined structure. Since the terminal elements within the subject and the terminal elements within the VP were built in different CUs, they do not stand in the asymmetric c-command relations that the LCA requires for linearization. The computational system resolves this by applying Spell-Out to the subject before it merges with the main clause. Spell-Out ships the internal structure of the subject to the phonological and interpretive components, collapsing the subject into an atomic, word-like object (what Nunes and Uriagereka call the spelled-out form of the phrase). This atomic object retains its label (and can therefore still participate in syntactic operations like agreement), but its internal constituents are no longer accessible to further syntactic computation. The resulting structure, after Spell-Out has applied to the subject and it has merged with the main clausal spine, is shown in (\ref{ex_mso2}):
+
+\ex \label{ex_mso2}
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=8mm,
+  l sep=8mm,
+  anchor=center,
+}
+[vP
+  [{pictures-of-John}]
+  [v$'$
+    [v]
+    [VP
+      [V\\upset]
+      [DP
+        [{the voters}, roof]
+      ]
+    ]
+  ]
+]
+\end{forest}
+\xe
+
+\noindent
+The subject \textit{pictures-of-John} is represented here as an atomic element with no internal structure visible to the syntax. Its terminal nodes have already been shipped to the phonological component and are unavailable for further computation.
+
+The same logic applies to adjuncts. An adjunct clause like \textit{before filing the papers} is built in its own workspace, and before it can be adjoined to the main clausal spine, its internal structure must be spelled out. After Spell-Out, the adjunct is an opaque, atomic object from the perspective of the ongoing derivation.
+
+\paragraph{Deriving CED effects.} Multiple Spell-Out has a far-reaching consequence: it derives the Condition on Extraction Domains (CED) as a \textit{timing effect} rather than a stipulated constraint on movement \citep{nunes2000}. The CED, originally formulated by \cite{huang1982}, captures the generalization that extraction from subjects and adjuncts is barred, while extraction from complements is permitted:
+
+\pex \label{ex_ced}
+\a \label{ex_ced_a} *Which politician did [pictures of \gap{}] upset the voters?
+\a \label{ex_ced_b} *Which paper did you read \textit{Don Quixote} [before filing \gap{}]?
+\a \label{ex_ced_c} Which paper did you file \gap{}?
+\xe
+
+\noindent
+Under MSO, the unacceptability of (\ref{ex_ced_a}) and (\ref{ex_ced_b}) follows directly from the timing of Spell-Out. In (\ref{ex_ced_a}), the subject DP \textit{pictures of which politician} is assembled in a separate CU and must be spelled out before it merges with the main clause. Once Spell-Out applies, the internal structure of the subject, including the wh-phrase \textit{which politician}, is shipped to the phonological component and is no longer accessible to the computational system. When the interrogative C is later merged and needs to attract a wh-element to its specifier, no wh-element is available: the only copy of \textit{which politician} is trapped inside the spelled-out subject. The derivation therefore crashes, because the strong wh-feature on C cannot be checked. The same reasoning applies to (\ref{ex_ced_b}): the adjunct is spelled out before merging with the main clause, rendering its contents opaque.
+
+Extraction from complements, as in (\ref{ex_ced_c}), succeeds because complements are built within the same CU as the selecting head. No separate Spell-Out step is required, and the wh-phrase remains accessible throughout the derivation.
+
+\paragraph{Phases and $\theta$-roles.} We further assume the Phase-Impenetrability Condition (PIC), with C, v, and D functioning as phase heads \citep{chomsky2001}. An element must reach the left edge of a phase (i.e., a specifier or adjunct position at the phase boundary) to remain accessible to operations in the next higher phase.
+
+Following \cite{hornstein1999}, we treat $\theta$-roles as formal features. Under this view, a DP enters the derivation in a $\theta$-position and may subsequently move to additional $\theta$-positions, checking a new $\theta$-feature at each landing site. This eliminates the classical $\theta$-Criterion’s prohibition against movement into $\theta$-positions and allows a single DP to bear multiple $\theta$-roles across the course of a derivation. Importantly, the $\theta$-Criterion and the Case Filter are computed by phase: a DP must bear exactly one $\theta$-role and one Case within each phase, though multiple valuations are permitted across the derivation as a whole.
+
+\paragraph{} With these assumptions in place, we can proceed to the analysis. It should be emphasized that the account rests entirely on general principles of Merge, sideward movement, and the timing of Spell-Out, each of which is motivated on independent grounds. From this analysis we will see that ACC falls out from the derivational timing of when Spell-Out applies to different domains and when sideward movement is possible.
+
+\subsection{Adjunct PGs}
+
+For standard cases of adjunct PGs, we adopt the analysis developed by \cite{nunes2000}. The core idea can be sketched as follows: in sentences such as (\ref{ex4.1}), the adjunct clause is constructed in a separate derivational workspace. The wh-phrase is first merged inside the adjunct as the internal argument of \textit{read}. Then, prior to the adjunct being spelled out and merged with the main clause, the wh-phrase undergoes sideward movement into the matrix workspace, where it serves as the internal argument of \textit{file}.
+
+\ex \label{ex4.1}
+What did John file \gap{} before reading \gap{}?
+\xe
+
+Let us consider this derivation in greater detail. The sentence in (\ref{ex4.1}) involves two distinct derivational workspaces. In one, the adjunct clause is being constructed: the verb \textit{read} merges with its internal argument, the wh-phrase \textit{what}, assigning it a $\theta$-role. In the other, the matrix VP is being assembled: the verb \textit{file} has been merged, but its internal argument position remains unfilled. The simplified structures at this stage are shown in (\ref{ex4.1_ws}):
+
+\ex \label{ex4.1_ws}
+\TwoTreeCols{%
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=8mm,
+  l sep=8mm,
+  anchor=center,
+}
+[PP
+  [P\\before]
+  [VP
+    [V\\reading]
+    [what$_i$]
+  ]
+]
+\end{forest}%
+}{%
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=8mm,
+  l sep=8mm,
+  anchor=center,
+}
+[VP
+  [V\\file]
+  [\phantom{what$_i$}, edge={dashed}]
+]
+\end{forest}%
+}
+\xe
+
+\noindent
+Before the adjunct is spelled out, \textit{what} undergoes sideward movement: it is copied from the adjunct and merged as the internal argument of \textit{file}, satisfying the verb’s $\theta$-requirement. Now \textit{what} has copies in both structures, as shown in (\ref{ex4.1_sm}):
+
+\ex \label{ex4.1_sm}
+\TwoTreeCols{%
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=8mm,
+  l sep=8mm,
+  anchor=center,
+}
+[PP
+  [P\\before]
+  [VP
+    [V\\reading]
+    [what$_i$]
+  ]
+]
+\end{forest}%
+}{%
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=8mm,
+  l sep=8mm,
+  anchor=center,
+}
+[VP
+  [V\\file]
+  [what$_i$]
+]
+\end{forest}%
+}
+\xe
+
+\noindent
+With the wh-phrase safely copied into the matrix VP, the adjunct is spelled out, collapsing its internal structure into an opaque, atomic object. The spelled-out adjunct is then merged with the matrix VP.\footnote{We assume here that adjuncts of the relevant type adjoin to VP. This differs from the analyses reviewed in Section 2, which assumed adjunction to vP. Nothing crucial hinges on this choice for the cases at hand, but VP-adjunction simplifies the derivation by placing the adjunct below the external argument position (Spec,vP) without requiring additional structural assumptions. If adjuncts are instead adjoined to vP, the same results obtain so long as the verbal domain is split into a VoiceP and a vP layer, with external arguments introduced in Spec,VoiceP above the adjunction site \citep[cf.][]{kratzer1996}. We set this alternative aside and adopt VP-adjunction for expositional clarity.} The resulting structure at this stage of the derivation is shown in (\ref{ex4.1_tree}):
+
+\ex \label{ex4.1_tree}
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=10mm,
+  l sep=8mm,
+  anchor=center,
+}
+[VP
+  [VP
+    [V\\file]
+    [what$_i$]
+  ]
+  [{before-reading-what$_i$}]
+]
+\end{forest}
+\xe
+
+\noindent
+From this point, the matrix derivation proceeds normally. The light verb v merges, and the external argument \textit{John} is introduced in Spec,vP. T merges, and \textit{John} raises to Spec,TP. Finally, the interrogative C merges, and \textit{what} must move to Spec,CP to check the matrix wh-feature. It is the copy of \textit{what} in the complement position of \textit{file} that undergoes this movement, raising through the left edge of vP to Spec,CP. The copy inside the adjunct is no longer accessible: it was sealed inside the adjunct when Spell-Out applied, and it cannot participate in any further syntactic operations. The derivation converges. At LF, the adjunct-internal copy is interpreted (establishing the covariation between the two gap positions), but at PF it is deleted by chain reduction. Only the copy in Spec,CP is pronounced.
+
+The crucial property of this derivation is that sideward movement occurs \textit{before} the adjunct is spelled out, ensuring that the wh-phrase remains accessible to the matrix derivation. Once the adjunct has been spelled out and merged with the matrix clause, its internal contents are frozen. Movement from within a spelled-out adjunct is no longer possible. It is this derivational timing that permits PGs in cases like (\ref{ex4.1}).
+
+\subsubsection{Deriving ACC in adjunct PGs}
+
+We now turn to cases of adjunct PGs that violate the ACC condition, as in (\ref{ex4.2}).
+
+\ex \label{ex4.2}
+*Who \gap{} liked Mary before she met \gap{}?
+\xe
+
+\noindent
+In (\ref{ex4.2}), the wh-phrase \textit{who} is intended to serve as both the matrix subject and the antecedent of a PG inside the adjunct. Under our analysis, this sentence is correctly predicted to be unacceptable. The derivation proceeds as follows.
+
+In one workspace, the adjunct \textit{before she met who} is assembled: the wh-phrase \textit{who} merges as the internal argument of \textit{met}. In the other, the matrix VP \textit{liked Mary} is being constructed: the verb \textit{like} merges with its internal argument \textit{Mary}, filling the object position. The simplified structures at this stage are shown in (\ref{ex4.2_ws}):
+
+\ex \label{ex4.2_ws}
+\TwoTreeCols{%
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=8mm,
+  l sep=8mm,
+  anchor=center,
+}
+[PP
+  [P\\before]
+  [VP
+    [DP\\she]
+    [V$'$
+      [V\\met]
+      [who$_i$]
+    ]
+  ]
+]
+\end{forest}%
+}{%
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=8mm,
+  l sep=8mm,
+  anchor=center,
+}
+[VP
+  [V\\liked]
+  [DP\\Mary]
+]
+\end{forest}%
+}
+\xe
+
+\noindent
+At this point, there is no unfilled $\theta$-position in the matrix VP to which \textit{who} could sideward-move. The internal argument of \textit{like} is already occupied by \textit{Mary}, and the external argument position (Spec,vP) does not yet exist, since v has not been merged. No sideward movement is possible.
+
+The adjunct must now be spelled out before it can adjoin to the matrix VP. Spell-Out renders the adjunct opaque, trapping \textit{who} inside it. The resulting structure, after the adjunct has been spelled out and adjoined to VP but before v has merged, is shown in (\ref{ex4.4}):
+
+\ex \label{ex4.4}
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=10mm,
+  l sep=8mm,
+  anchor=center,
+}
+[VP
+  [VP
+    [V\\liked]
+    [DP\\Mary]
+  ]
+  [{before-she-met-who$_i$}]
+]
+\end{forest}
+\xe
+
+\noindent
+The wh-phrase \textit{who} is trapped inside the spelled-out adjunct and is no longer accessible to the computational system. The only DP available to serve as the subject is \textit{Mary}, which has already been merged as the internal argument of \textit{liked}. When v merges above VP, \textit{Mary} raises to Spec,vP, receiving the external argument $\theta$-role and Accusative Case. \textit{Mary} then raises to Spec,TP to check Nominative Case. Finally, the interrogative C merges above TP. The resulting structure is shown in (\ref{ex4.2_crash}):
+
+\ex \label{ex4.2_crash}
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=7mm,
+  l sep=8mm,
+  anchor=center,
+}
+[CP
+  [C, name=C]
+  [TP
+    [Mary$_j$, name=Mary_TP]
+    [T$'$
+      [T]
+      [vP
+        [Mary$_j$, name=Mary_vP]
+        [v$'$
+          [v]
+          [VP
+            [VP
+              [V\\liked]
+              [Mary$_j$, name=Mary_base]
+            ]
+            [{before-she-met-who$_i$}]
+          ]
+        ]
+      ]
+    ]
+  ]
+]
+\draw[-{Stealth[length=4pt]}, thick]
+  (Mary_base.south) -- ++(0,-5mm) -| ([xshift=-8mm]Mary_vP.south west) -- (Mary_vP.south west);
+\draw[-{Stealth[length=4pt]}, thick]
+  (Mary_vP.west) -| ([xshift=-12mm]Mary_TP.south west) -- (Mary_TP.south west);
+\end{forest}
+\xe
+
+\noindent
+This derivation fails for two reasons. First, C bears a strong wh-feature that must be checked by a wh-element in Spec,CP. The only wh-phrase in the derivation is \textit{who}, but it is sealed inside the spelled-out adjunct and cannot move to Spec,CP. The wh-feature on C remains unchecked, and the derivation crashes.
+
+Second, even setting the wh-feature aside, the configuration in (\ref{ex4.2_crash}) is independently ruled out by the phase-based computation of Case. Recall that the $\theta$-Criterion and Case Filter are evaluated within the complement domain of each phase head. Spec,vP and Spec,TP both fall within the complement domain of C, the next higher phase head. \textit{Mary} is therefore valued for Case twice within a single phase domain: Accusative at Spec,vP and Nominative at Spec,TP. This violates the requirement that a DP bear only one Case per phase, and the derivation crashes independently of the unchecked wh-feature.\footnote{The same reasoning accounts for the unacceptability of reflexive-like PG configurations such as (i):
+
+\ex[exno=i] \label{fn3}
+*Who \gap{} liked \gap{} after Mary praised \gap{}? (\emph{cf.} John liked himself after Mary praised him.)
+\xe
+
+\noindent
+Here, the wh-phrase originates inside the adjunct and sideward-merges as the object of \textit{liked}. It subsequently moves to Spec,vP to check Accusative Case. When it later raises to Spec,TP for Nominative, it bears two Case values within a single phase, violating the Case Filter.}
+
+The general pattern that emerges is this: sideward movement out of an adjunct can only target positions within the matrix VP, that is, positions that are \textit{below} the adjunction site. The external argument position (Spec,vP), which is above the VP, is not yet available at the point when sideward movement must occur. This means that whenever the licensing gap is in a position that c-commands the adjunction site (such as the subject position), the PG is ruled out. This is the ACC condition, now derived from the timing of Spell-Out and the structure of the verbal domain.
+
+\subsubsection{Further predictions}
+
+The preceding analysis makes several further predictions. First, it straightforwardly accounts for the acceptability of PGs inside fronted adjuncts, as in (\ref{ex4.5}):
+
+\ex \label{ex4.5}
+Which student, after she praised \gap{}, \gap{} liked Mary?
+\xe
+
+\noindent
+If fronted adjuncts are base-generated adjoined to TP, then the wh-phrase can sideward-merge into the matrix vP (as the external argument) before the adjunct is spelled out and merged at the TP level. In one workspace, the adjunct \textit{after she praised which student} is being assembled: the wh-phrase \textit{which student} merges as the internal argument of \textit{praised}. In the other, the matrix vP is being constructed: the verb \textit{liked} has merged with its internal argument \textit{Mary}, v has merged, and the external argument position (Spec,vP) remains unfilled. The simplified structures at this stage are shown in (\ref{ex4.5_ws}):
+
+\ex \label{ex4.5_ws}
+\TwoTreeCols{%
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=8mm,
+  l sep=8mm,
+  anchor=center,
+}
+[PP
+  [P\\after]
+  [CP
+    [{she praised which student$_i$}, roof]
+  ]
+]
+\end{forest}%
+}{%
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=8mm,
+  l sep=8mm,
+  anchor=center,
+}
+[vP
+  [\phantom{which student$_i$}, edge={dashed}]
+  [v$'$
+    [v]
+    [VP
+      [V\\liked]
+      [DP\\Mary]
+    ]
+  ]
+]
+\end{forest}%
+}
+\xe
+
+\noindent
+Unlike the VP-adjunction cases discussed above, the external argument position is available here because v has already merged. The wh-phrase \textit{which student} undergoes sideward movement from the adjunct into Spec,vP, receiving the external argument $\theta$-role. The wh-phrase now has copies in both structures, as shown in (\ref{ex4.5_sm}):
+
+\ex \label{ex4.5_sm}
+\TwoTreeCols{%
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=8mm,
+  l sep=8mm,
+  anchor=center,
+}
+[PP
+  [P\\after]
+  [CP
+    [{she praised which student$_i$}, roof]
+  ]
+]
+\end{forest}%
+}{%
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=8mm,
+  l sep=8mm,
+  anchor=center,
+}
+[vP
+  [{which student}$_i$]
+  [v$'$
+    [v]
+    [VP
+      [V\\liked]
+      [DP\\Mary]
+    ]
+  ]
+]
+\end{forest}%
+}
+\xe
+
+\noindent
+With the wh-phrase safely copied into Spec,vP, the adjunct is spelled out, collapsing its internal structure into an atomic object. The spelled-out adjunct is then adjoined to TP. The wh-phrase in Spec,vP raises to Spec,TP and then to Spec,CP. The resulting structure is shown in (\ref{ex4.5_tree}):
+
+\ex \label{ex4.5_tree}
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=7mm,
+  l sep=8mm,
+  anchor=center,
+}
+[CP
+  [{which student}$_i$, name=wh_CP]
+  [C$'$
+    [C]
+    [TP
+      [{after-she-praised-which-student$_i$}]
+      [TP
+        [{which student}$_i$, name=wh_TP]
+        [T$'$
+          [T]
+          [vP
+            [{which student}$_i$, name=wh_vP]
+            [v$'$
+              [v]
+              [VP
+                [V\\liked]
+                [DP\\Mary]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+]
+\draw[-{Stealth[length=4pt]}, thick]
+  (wh_vP.west) -| ([xshift=-8mm]wh_TP.south west) -- (wh_TP.south west);
+\draw[-{Stealth[length=4pt]}, thick]
+  (wh_TP.west) -| ([xshift=-12mm]wh_CP.south west) -- (wh_CP.south west);
+\end{forest}
+\xe
+
+\noindent
+The adjunction site (TP) is above the licensing gap in Spec,vP rather than below it. The licensing gap does not c-command the PG inside the adjunct, and the derivation converges. This is the reverse of the pattern in (\ref{ex4.2}), where the adjunct was adjoined to VP and the licensing gap was required to be in the subject position above it.
+
+Second, the analysis predicts a contrast between unergative and unaccusative subjects with respect to adjunct PGs:
+
+\pex\label{ex4.1.1}
+\a\label{ex4.1.1a} *Who \gap{} cried after John pushed \gap{}? \hfill (unergative)
+\a\label{ex4.1.1b} ?Who \gap{} fell after John pushed \gap{}? \hfill (unaccusative)
+\xe
+
+\noindent
+In our judgment, this contrast is borne out. The subject of the unergative verb in (\ref{ex4.1.1a}) is an external argument, merged in Spec,vP, above the VP-adjoined adjunct. At the point when the adjunct is being assembled, the matrix VP consists only of the intransitive verb \textit{cried}, which has no internal argument position available for sideward movement. The wh-phrase is trapped inside the adjunct when it is spelled out, and the derivation crashes.
+
+In (\ref{ex4.1.1b}), by contrast, the surface subject of the unaccusative verb is standardly analyzed as originating in the internal argument position, inside VP. Because this position is below the adjunction site, sideward movement of the wh-phrase from the adjunct into the internal argument position of \textit{fell} is possible before the adjunct is spelled out. The wh-phrase later raises to Spec,vP and then to Spec,TP, and the derivation converges.
+
+The contrast is illustrated in (\ref{ex4.1.1_trees}). In both structures, the adjunct has been spelled out and adjoined to VP. In (\ref{ex4.1.1a_tree}), the structure is ungrammatical: \textit{who} appears in Spec,vP, but it could only have arrived there by moving out of the spelled-out adjunct, which is impossible once Spell-Out has applied. There is no VP-internal position to which \textit{who} could have sideward-moved prior to Spell-Out, since unergative \textit{cried} takes no internal argument. In (\ref{ex4.1.1b_tree}), \textit{who} has sideward-moved into the complement position of \textit{fell} before Spell-Out, and subsequently raises to Spec,vP:
+
+\pex \label{ex4.1.1_trees}
+\a \label{ex4.1.1a_tree} *Unergative (\textit{cried}):\\
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=7mm,
+  l sep=8mm,
+  anchor=center,
+}
+[vP
+  [{\st{who$_i$}}]
+  [v$'$
+    [v]
+    [VP
+      [VP
+        [V\\cried]
+      ]
+      [{after-John-pushed-who$_i$}]
+    ]
+  ]
+]
+\end{forest}
+\a \label{ex4.1.1b_tree} Unaccusative (\textit{fell}):\\
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=7mm,
+  l sep=8mm,
+  anchor=center,
+}
+[vP
+  [who$_i$, name=wh_vP]
+  [v$'$
+    [v]
+    [VP
+      [VP
+        [V\\fell]
+        [who$_i$, name=wh_VP]
+      ]
+      [{after-John-pushed-who$_i$}]
+    ]
+  ]
+]
+\draw[-{Stealth[length=4pt]}, thick]
+  (wh_VP.south) -- ++(0,-4mm) -| ([xshift=-8mm]wh_vP.south west) -- (wh_vP.south west);
+\end{forest}
+\xe
+
+In this section, we have shown how an analysis built on sideward movement and Multiple Spell-Out correctly predicts when adjunct PGs are possible and when they are ruled out. The anti-c-command condition in adjunct PGs is not stipulated but follows from the interaction between adjunction height and the availability of $\theta$-positions at the relevant derivational stage. In the next section, we extend this analysis to subject PGs.
+
+\subsection{Subject PGs}
+
+Subject PGs involve a gap inside a complex subject that covaries with a wh-phrase whose licensing gap appears elsewhere in the clause, typically in the object position. A representative example is given in (\ref{ex_subj1}):
+
+\ex \label{ex_subj1}
+Who$_i$ do [friends of \gap{}$_i$] admire \gap{}$_i$?
+\xe
+
+\noindent
+Subject PGs pose a prima facie challenge for any theory of movement, since subjects are standardly taken to be islands: the CED prohibits extraction from them. If the gap inside the subject in (\ref{ex_subj1}) were derived by ordinary wh-movement, we would expect the sentence to be unacceptable, on a par with (\ref{ex_subj2}):
+
+\ex \label{ex_subj2}
+*Who$_i$ do [friends of \gap{}$_i$] admire Mary?
+\xe
+
+\noindent
+In (\ref{ex_subj2}), the wh-phrase has been extracted from the subject, leaving only one gap. The result is a clear CED violation and the sentence is unacceptable. The contrast between (\ref{ex_subj1}) and (\ref{ex_subj2}) shows that the gap inside the subject in (\ref{ex_subj1}) is not produced by extraction from the subject. Rather, as with adjunct PGs, the gap arises through sideward movement before the subject is spelled out.
+
+The analysis follows the same logic developed for adjunct PGs, and largely mirrors the account proposed in \cite{nunes2004}. Under Multiple Spell-Out, a complex subject such as \textit{friends of who} is assembled in its own derivational workspace, separate from the matrix clause. As a noncomplement, the subject cannot be built within the same command unit as the matrix VP; it must be constructed independently and spelled out before merging with the main clausal spine.
+
+The derivation of (\ref{ex_subj1}) proceeds as follows. In one workspace, the subject DP \textit{friends of who} is being assembled: the wh-phrase \textit{who} is merged as the complement of \textit{of}, receiving a $\theta$-role inside the subject DP. In the other, the matrix VP is being constructed: the verb \textit{admire} has been merged, but its internal argument position remains unfilled. The two structures at this stage are shown in (\ref{ex_subj3_ws}):
+
+\ex \label{ex_subj3_ws}
+\TwoTreeCols{%
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=8mm,
+  l sep=8mm,
+  anchor=center,
+}
+[DP
+  [NP
+    [N\\friends]
+    [PP
+      [P\\of]
+      [who$_i$]
+    ]
+  ]
+]
+\end{forest}%
+}{%
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=8mm,
+  l sep=8mm,
+  anchor=center,
+}
+[VP
+  [V\\admire]
+  [\phantom{who$_i$}, edge={dashed}]
+]
+\end{forest}%
+}
+\xe
+
+\noindent
+Before the subject DP is spelled out, sideward movement applies: \textit{who} is copied from the subject DP and merged as the internal argument of \textit{admire}, satisfying the verb's $\theta$-requirement. The wh-phrase now has copies in both structures, as shown in (\ref{ex_subj3}):
+
+\ex \label{ex_subj3}
+\TwoTreeCols{%
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=8mm,
+  l sep=8mm,
+  anchor=center,
+}
+[DP
+  [NP
+    [N\\friends]
+    [PP
+      [P\\of]
+      [who$_i$]
+    ]
+  ]
+]
+\end{forest}%
+}{%
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=8mm,
+  l sep=8mm,
+  anchor=center,
+}
+[VP
+  [V\\admire]
+  [who$_i$]
+]
+\end{forest}%
+}
+\xe
+
+\noindent
+With the wh-phrase safely copied into the matrix VP, the subject DP is spelled out, collapsing its internal structure into an atomic object. The spelled-out subject is then merged into the matrix clause in Spec,vP (as the external argument), and subsequently raises to Spec,TP. It is the copy of \textit{who} in the complement position of \textit{admire} that moves through the edge of vP and ultimately to Spec,CP to check the interrogative feature on C; the copy inside the subject is no longer accessible. The resulting structure is shown in (\ref{ex_subj4}):
+
+\ex \label{ex_subj4}
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=7mm,
+  l sep=8mm,
+  anchor=center,
+}
+[CP
+  [who$_i$, name=wh_CP]
+  [C$'$
+    [C\\do]
+    [TP
+      [{[friends-of-who$_i$]}$_j$]
+      [T$'$
+        [T]
+        [vP
+          [who$_i$, name=wh_vP]
+          [vP
+            [{[friends-of-who$_i$]}$_j$]
+            [v$'$
+              [v]
+              [VP
+                [V\\admire]
+                [who$_i$, name=wh_VP]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+]
+\draw[-{Stealth[length=4pt]}, thick]
+  (wh_VP.south) -- ++(0,-4mm) -| ([xshift=-8mm]wh_vP.south west) -- (wh_vP.south west);
+\draw[-{Stealth[length=4pt]}, thick]
+  (wh_vP.west) -| ([xshift=-12mm]wh_CP.south west) -- (wh_CP.south west);
+\end{forest}
+\xe
+
+\noindent
+This derivation succeeds. The copy of \textit{who} inside the spelled-out subject is interpreted at LF (where it establishes the covariation between the subject and the wh-phrase) but is deleted at PF by chain reduction. The copy in Spec,CP is the one that is pronounced.
+
+Crucially, the subject PG is possible only because sideward movement applies \textit{before} the subject is spelled out. In the CED-violating case (\ref{ex_subj2}), no sideward movement occurs; the wh-phrase is the only gap, and extraction from the spelled-out subject is blocked. The contrast between (\ref{ex_subj1}) and (\ref{ex_subj2}) therefore receives a principled explanation under Multiple Spell-Out: what distinguishes PG constructions from ordinary extraction is the availability of sideward movement prior to Spell-Out.
+
+\subsubsection{ACC in subject PGs}
+
+For subject PGs, the anti-c-command condition is automatically satisfied under our analysis. In (\ref{ex_subj1}), the licensing gap is the copy of \textit{who} in object position (inside VP), while the PG is inside the spelled-out subject in Spec,TP. The object position is c-commanded by the subject, not the reverse. There is no derivational configuration in which the licensing gap could c-command the PG, because the object position is structurally lower than the subject.
+
+This follows from the same derivational logic that derived ACC in adjunct PGs. Sideward movement out of the subject can only target positions that exist in the matrix VP at the time of the sideward movement operation. When the subject is being assembled, the only available $\theta$-position in the matrix VP is the internal argument of V. Therefore, the wh-phrase necessarily lands in a position that is \textit{below} the eventual position of the subject. The licensing gap (inside VP) can never c-command the PG (inside the subject in Spec,vP), and ACC is derived.
+
+Note that this also rules out the reverse configuration, in which a wh-phrase originating in the matrix VP sideward-moves \textit{into} the subject. Even if such a movement were possible, the wh-phrase would have no way to return to the main clausal spine: it cannot move to Spec,vP, because that position must be reserved for the spelled-out subject DP. Once the wh-phrase sideward-moves into the subject, it is trapped there. That said, a more nuanced version of this scenario is worth considering. Suppose the wh-phrase is merged as the complement of V, and a copy of it sideward-moves into the subject DP. The subject is then spelled out and merged at Spec,vP. At this point, the \textit{lower} copy of the wh-phrase (the one remaining in complement-of-V position) could in principle be targeted for successive-cyclic movement through the left edge of vP to Spec,CP, checking the wh-feature on C. This would require the same copy to be targeted twice for movement: once for sideward movement into the subject, and again for cyclic movement to Spec,CP. Whether this is permitted depends on assumptions about the copy theory of movement that go beyond the scope of the present analysis, and we leave this question open.
+
+In this section, we have shown that subject PGs receive the same treatment as adjunct PGs under the present analysis. The gap inside the subject arises through sideward movement before Spell-Out, and the anti-c-command condition is derived from the fact that sideward movement can only target positions below the eventual position of the subject. In the next section, we turn to complement-clause PGs, where the analysis makes different predictions.
+
+\subsection{Complement-Clause PGs}
+
+Complement-clause PGs differ fundamentally from the adjunct and subject PGs discussed above. Recall that in the preceding sections, the gap inside the island domain (adjunct or subject) was derived by sideward movement: the wh-phrase was copied out of the island before it was spelled out and merged with the main clause. The anti-c-command condition followed from the timing of these operations: sideward movement could only target positions below the adjunction site of the island.
+
+Complement clauses, however, are not islands. They are complements of V, built within the same command unit as the matrix verb. No separate workspace is required, no Spell-Out barrier intervenes, and no sideward movement is needed. Instead, the wh-phrase moves through the complement clause by ordinary successive-cyclic movement. As we will see, this difference is what allows complement-clause PGs to surface without violating any constraint, and what explains why ACC effects do not arise in these constructions.
+
+Consider again the complement-clause PG in (\ref{ex4.3.1}):
+
+\ex \label{ex4.3.1}
+Which candidate will John inform \gap{} that he hired \gap{}?
+\xe
+
+\noindent
+The verb \textit{inform} selects two internal arguments: a DP Goal (the person being informed) and a CP complement (the content of the information). The external argument (the agent) is introduced in Spec,vP. The derivation proceeds as follows.
+
+First, the embedded CP is constructed. The wh-phrase \textit{which candidate} is merged as the internal argument of \textit{hire}, receiving a $\theta$-role. It then moves through the embedded vP edge and TP to Spec,CP, where it satisfies the edge feature on the embedded C head. The structure at this point is given in (\ref{ex4.3.2}):
+
+\ex \label{ex4.3.2}
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=7mm,
+  l sep=8mm,
+  anchor=center,
+}
+[CP
+  [{which candidate}$_i$, name=wh_emb_CP]
+  [C$'$
+    [C\\that]
+    [TP
+      [he]
+      [T$'$
+        [T]
+        [vP
+          [{which candidate}$_i$, name=wh_emb_vP]
+          [v$'$
+            [v]
+            [VP
+              [V\\hire]
+              [{which candidate}$_i$, name=wh_emb_VP]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+]
+\draw[-{Stealth[length=4pt]}, thick]
+  (wh_emb_VP.south) -- ++(0,-4mm) -| ([xshift=-8mm]wh_emb_vP.south west) -- (wh_emb_vP.south west);
+\draw[-{Stealth[length=4pt]}, thick]
+  (wh_emb_vP.west) -| ([xshift=-12mm]wh_emb_CP.south west) -- (wh_emb_CP.south west);
+\end{forest}
+\xe
+
+\noindent
+At this point, the matrix verb \textit{inform} is merged with the embedded CP, satisfying its c-selectional requirement:
+
+\ex \label{ex4.3.2b}
+[V$'$ inform [CP which candidate$_i$ [that he hired which candidate$_i$]]]
+\xe
+
+\noindent
+The verb \textit{inform} also requires a DP Goal argument, the person being informed. The wh-phrase \textit{which candidate} is accessible at the embedded CP edge, and it can move from Spec,CP to Spec,VP, checking \textit{inform}'s Goal $\theta$-feature. Note that this movement from an A$'$-position (Spec,CP) to an A-position (Spec,VP) constitutes improper movement, which is normally disallowed. However, following \cite{hornstein1999}, we take this movement to be permitted when it is motivated by Last Resort: the Goal $\theta$-feature on \textit{inform} must be checked, and the wh-phrase at the embedded CP edge is the only element that can satisfy this requirement. The resulting structure is shown in (\ref{ex4.3.4a}):
+
+\ex \label{ex4.3.4a}
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=7mm,
+  l sep=8mm,
+  anchor=center,
+}
+[VP
+  [{which candidate}$_i$, name=whVP]
+  [V$'$
+    [V\\inform]
+    [CP
+      [{which candidate}$_i$, name=whCP]
+      [{that he hired which candidate$_i$}, roof]
+    ]
+  ]
+]
+\draw[-{Stealth[length=4pt]}, thick]
+  (whCP.west) -| ([xshift=-8mm]whVP.south west) -- (whVP.south west);
+\end{forest}
+\xe
+
+\noindent
+At this point, the wh-phrase bears two $\theta$-roles, one from \textit{hire} (Theme, valued in the embedded vP phase) and one from \textit{inform} (Goal, valued in the matrix vP phase). Because these two valuations occur in distinct phase domains, no violation of the $\theta$-Criterion arises. This is permitted under the assumption, following \cite{hornstein1999}, that $\theta$-roles are features and that the $\theta$-Criterion is evaluated by phase.
+
+\subsubsection{Why the wh-phrase must fill the Goal position}
+
+The alternative derivation, in which an externally merged DP fills the Goal position, does not converge. Suppose \textit{John} is externally merged as the Goal argument of \textit{inform}, filling Spec,VP:
+
+\ex \label{ex4.3.3}
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=7mm,
+  l sep=8mm,
+  anchor=center,
+}
+[VP
+  [John]
+  [V$'$
+    [V\\inform]
+    [CP
+      [{which candidate}$_i$]
+      [{that he hired which candidate$_i$}, roof]
+    ]
+  ]
+]
+\end{forest}
+\xe
+
+\noindent
+Since the target sentence has \textit{John} as the agent, \textit{John} must eventually reach Spec,vP when v merges. At Spec,vP, \textit{John} would receive the external argument $\theta$-role (agent) from v. But \textit{John} has already received a $\theta$-role from \textit{inform} (Goal) at Spec,VP. Both $\theta$-roles are valued within the same vP phase, violating the requirement that a DP bear only one $\theta$-role per phase. The derivation crashes.
+
+Returning to the convergent derivation, with the Goal position filled by the wh-phrase, v merges and \textit{John} is externally merged in Spec,vP as the agent. \textit{John} receives only one $\theta$-role (agent) in this phase, and subsequently raises to Spec,TP for Nominative Case. The wh-phrase moves from Spec,VP through the vP edge to Spec,CP. The final structure is shown in (\ref{ex4.3.4}):
+
+\ex \label{ex4.3.4}
+\begin{forest}
+for tree={
+  scale=0.75,
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=7mm,
+  l sep=8mm,
+  anchor=center,
+}
+[CP
+  [{wh.~cand.}$_i$, name=who_CP_high]
+  [C$'$
+    [C\\will]
+    [TP
+      [John$_j$, name=John_TP]
+      [T$'$
+        [T]
+        [vP
+          [John$_j$, name=John_vP]
+          [v$'$
+            [{wh.~cand.}$_i$, name=who_vP]
+            [v$'$
+              [v]
+              [VP
+                [{wh.~cand.}$_i$, name=who_VP]
+                [V$'$
+                  [V\\inform]
+                  [CP
+                    [{wh.~cand.}$_i$, name=who_CP]
+                    [C$'$
+                      [C\\that]
+                      [TP
+                        [{he$_j$ hired wh.~cand.$_i$}, roof]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+]
+\draw[-{Stealth[length=4pt]}, thick]
+  (who_CP.west) -| ([xshift=-6mm]who_VP.south west) -- (who_VP.south west);
+\draw[-{Stealth[length=4pt]}, thick]
+  (who_VP.west) -| ([xshift=-8mm]who_vP.south west) -- (who_vP.south west);
+\draw[-{Stealth[length=4pt]}, thick]
+  (who_vP.west) -| ([xshift=-14mm]who_CP_high.south west) -- (who_CP_high.south west);
+\draw[-{Stealth[length=4pt]}, thick]
+  (John_vP.west) -| ([xshift=-10mm]John_TP.south west) -- (John_TP.south west);
+\end{forest}
+\xe
+
+\noindent
+The derivation converges. The wh-phrase has copies at each position it has moved through: inside the embedded VP (Theme of \textit{hire}), at the embedded CP edge, at Spec,VP (Goal of \textit{inform}), at the vP edge, and at Spec,CP. Chain reduction deletes all lower copies at PF, and only the copy in Spec,CP is pronounced. At LF, the copies in Spec,VP and inside the embedded VP are interpreted, yielding the reading in which the same individual is both informed and hired.
+
+\subsubsection{Ruling out bad complement-clause PGs}
+
+The analysis also correctly rules out unacceptable cases of complement-clause PGs. Consider (\ref{ex4.3_bad1}):
+
+\ex \label{ex4.3_bad1}
+*Who \gap{} informed John that he would hire \gap{}?
+\xe
+
+\noindent
+Here, \textit{who} is intended to serve as the matrix subject (the licensing gap) with a PG inside the complement clause. The embedded CP is constructed first: \textit{who} is merged as the internal argument of \textit{hire} and moves through the embedded vP edge to the embedded Spec,CP. At this point, the matrix verb \textit{inform} merges with the CP, and \textit{John} is externally merged as the Goal in Spec,VP. The light verb v then merges above VP. The structure at this stage is shown in (\ref{ex4.3_bad1_tree}):
+
+\ex \label{ex4.3_bad1_tree}
+\begin{forest}
+for tree={
+  scale=0.85,
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=7mm,
+  l sep=8mm,
+  anchor=center,
+}
+[vP
+  [\phantom{who$_i$}, edge={dashed}]
+  [v$'$
+    [v]
+    [VP
+      [John]
+      [V$'$
+        [V\\inform]
+        [CP
+          [who$_i$, name=wh_embCP]
+          [C$'$
+            [C\\that]
+            [TP
+              [{he would hire who$_i$}, roof]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+]
+\end{forest}
+\xe
+
+\noindent
+The copy of \textit{who} at the embedded Spec,CP must now move to Spec,vP to check the external argument $\theta$-feature. However, \textit{John} in Spec,VP intervenes between the embedded Spec,CP and Spec,vP. By the Minimal Link Condition, \textit{John} is a closer candidate for movement to Spec,vP than \textit{who}, blocking the wh-phrase from reaching the external argument position. Furthermore, even if \textit{who} could somehow reach Spec,vP, this would leave \textit{John} stranded in Spec,VP without Case: \textit{John} would need to raise to Spec,TP for Nominative, but this is blocked by the PIC. The derivation therefore crashes.
+
+Now consider (\ref{ex4.3_bad2}):
+
+\ex \label{ex4.3_bad2}
+*Who \gap{} informed \gap{} that he would hire John?
+\xe
+
+\noindent
+Here, \textit{who} is intended to fill both the matrix subject and the Goal of \textit{inform}. In this derivation, \textit{who} is externally merged in Spec,VP as the Goal of \textit{inform}, receiving a $\theta$-role. When v merges, \textit{who} must move to Spec,vP for the external argument $\theta$-role, and then raise to Spec,TP for Nominative Case. But Spec,vP and Spec,TP are both in the complement domain of C, the next higher phase head. \textit{Who} is therefore valued for Case twice within a single phase domain: Accusative at Spec,vP and Nominative at Spec,TP. This is the same double-Case violation that rules out the ACC-violating adjunct PG discussed in Section 4.1, and the derivation crashes for the same reason.
+
+\subsubsection{Why ACC does not hold}
+
+The crucial observation is that the complement clause is \textit{not} a separate derivational workspace. Unlike adjuncts and subjects, the CP complement of \textit{inform} is built within the same command unit as the matrix verb. There is no Spell-Out barrier between the embedded CP and the matrix VP; the wh-phrase moves from one to the other by ordinary successive-cyclic movement, not by sideward movement.
+
+This is why the anti-c-command condition does not arise for complement-clause PGs. Recall that in adjunct and subject PGs, ACC was derived from the timing of Spell-Out: the island domain had to be spelled out before merging with the main clause, and sideward movement could only target positions below the adjunction/merger site. These constraints forced the licensing gap to be structurally lower than the PG, producing the c-command asymmetry that characterizes ACC.
+
+None of this applies to complement-clause configurations. The matrix object gap (in Spec,VP) c-commands into the complement CP, and the gap inside the embedded clause is indeed c-commanded by the matrix gap. But this creates no problem, because there is no Spell-Out barrier to circumvent and no requirement that the two gap positions stand in a sisterhood relation. The wh-phrase simply moves through both positions in the course of ordinary successive-cyclic movement.
+
+The present analysis therefore predicts the following asymmetry: ACC effects should be observed with adjunct and subject PGs (where MSO and sideward movement are implicated) but \textit{not} with complement-clause PGs (where ordinary movement suffices). This is exactly the pattern observed in the data discussed in Section 2.4, and it falls out from the architecture of the grammar without any stipulation about c-command.
+
+\subsection{Dative PGs}
+
+The complement-clause case discussed above is not the only configuration in which our proposal diverges from ACC-based accounts. A similar pattern arises with prepositional dative constructions. Consider the contrast in (\ref{ex_dat1}), adapted from \cite{arregi2022}:
+
+\pex \label{ex_dat1}
+\a \label{ex_dat1a} Which girl did you give [a picture of \gap{}] [to \gap{}] yesterday?
+\a \label{ex_dat1b} Which book did you give \gap{} [to a fan of \gap{}] yesterday?
+\xe
+
+\noindent
+In (\ref{ex_dat1a}), the PG appears inside the direct object DP, and the licensing gap is inside the PP indirect object. In (\ref{ex_dat1b}), the reverse holds: the licensing gap is the direct object, and the PG is embedded inside the PP. The differing c-command relations are illustrated in (\ref{ex_dat1_trees}):
+
+\pex \label{ex_dat1_trees}
+\a \label{ex_dat1a_tree} (\ref{ex_dat1a}): PG in direct object, licensing gap in PP\\
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=8mm,
+  l sep=8mm,
+  anchor=center,
+}
+[VP
+  [DP
+    [{a picture of \gap{}$_i$}, roof]
+  ]
+  [V$'$
+    [V\\give]
+    [PP
+      [P\\to]
+      [{which girl}$_i$]
+    ]
+  ]
+]
+\end{forest}
+\a \label{ex_dat1b_tree} (\ref{ex_dat1b}): Licensing gap as direct object, PG in PP\\
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=8mm,
+  l sep=8mm,
+  anchor=center,
+}
+[VP
+  [{which book}$_i$]
+  [V$'$
+    [V\\give]
+    [PP
+      [P\\to]
+      [DP
+        [{a fan of \gap{}$_i$}, roof]
+      ]
+    ]
+  ]
+]
+\end{forest}
+\xe
+
+\noindent
+In (\ref{ex_dat1a_tree}), the licensing gap is inside the PP complement of V, which is c-commanded by the direct object in Spec,VP. The PG inside the direct object is not c-commanded by the licensing gap, and ACC is satisfied. In (\ref{ex_dat1b_tree}), the licensing gap \textit{is} the direct object in Spec,VP, which c-commands the PP and therefore c-commands the PG inside it. Under the anti-c-command condition, (\ref{ex_dat1b}) is predicted to be unacceptable.
+
+The prediction is a strong one. If ACC is a necessary condition on PG licensing, (\ref{ex_dat1b}) should be unacceptable, on a par with (\ref{ex_dat2}):
+
+\ex \label{ex_dat2}
+*Which celebrity \gap{} gave a book [to a fan of \gap{}] yesterday?
+\xe
+
+\noindent
+In (\ref{ex_dat2}), the subject gap c-commands the PG inside the PP, violating ACC. If (\ref{ex_dat1b}) is also an ACC violation, the two sentences should be similiarly degraded.
+
+Under the present proposal, however, there is no reason to expect (\ref{ex_dat1b}) to be unacceptable. The crucial observation is the same one that distinguished complement-clause PGs from adjunct and subject PGs: the PP indirect object \textit{to a fan of which book} is a \textit{complement} of \textit{give}, not an adjunct or a subject. It is built within the same command unit as the verb and the direct object. No separate derivational workspace is required, no Spell-Out barrier intervenes, and therefore no sideward movement is needed.
+
+\subsubsection{Deriving dative PGs}
+
+To see how the derivation proceeds, consider (\ref{ex_dat1b}) in detail. The verb \textit{give} selects three arguments: an external argument (the agent), a DP Theme (the thing given), and a PP Goal (the recipient). In the prepositional dative frame, the Theme appears as the direct object and the Goal as a PP complement.
+
+The derivation begins by assembling the PP complement. The preposition \textit{to} takes as its complement the DP \textit{a fan of which book}. Within this DP, the wh-phrase \textit{which book} is merged as the complement of \textit{of}, receiving a $\theta$-role. The resulting PP structure is given in (\ref{ex_dat3}):
+
+\ex \label{ex_dat3}
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=7mm,
+  l sep=8mm,
+  anchor=center,
+}
+[PP
+  [P\\to]
+  [DP
+    [D\\a]
+    [NP
+      [N\\fan]
+      [PP
+        [P\\of]
+        [{which book}$_i$]
+      ]
+    ]
+  ]
+]
+\end{forest}
+\xe
+
+\noindent
+Next, the matrix V \textit{give} merges with the PP, satisfying its Goal requirement. The verb also requires a Theme argument in its specifier. The wh-phrase \textit{which book} is accessible at this point, since it has not been spelled out, because the PP is a complement and therefore part of the same command unit as V. The wh-phrase moves from inside the PP to Spec,VP, checking the Theme $\theta$-feature of \textit{give}:
+
+\ex \label{ex_dat4}
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=7mm,
+  l sep=8mm,
+  anchor=center,
+}
+[VP
+  [{which book}$_i$, name=whVP]
+  [V$'$
+    [V\\give]
+    [PP
+      [P\\to]
+      [DP
+        [{a fan of which book$_i$}, roof, name=whPP]
+      ]
+    ]
+  ]
+]
+\draw[-{Stealth[length=4pt]}, thick]
+  (whPP.west) -| ([xshift=-8mm]whVP.south west) -- (whVP.south west);
+\end{forest}
+\xe
+
+\noindent
+This is an instance of ordinary A-movement within a single command unit. The wh-phrase now bears two $\theta$-roles: one from \textit{of} (valued within the DP phase) and one from \textit{give} (Theme, valued in the matrix vP phase). Because these valuations occur in distinct phases, no violation of the $\theta$-Criterion arises.
+
+The derivation continues in the expected way. The light verb v merges, and \textit{you} is externally merged in Spec,vP as the agent. The wh-phrase moves through the vP edge to the matrix Spec,CP. The final structure is shown in (\ref{ex_dat5}):
+
+\ex \label{ex_dat5}
+\begin{forest}
+for tree={
+  scale=0.75,
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=7mm,
+  l sep=8mm,
+  anchor=center,
+}
+[CP
+  [{wh.~book}$_i$, name=who_CP]
+  [C$'$
+    [C\\did]
+    [TP
+      [you$_j$, name=you_TP]
+      [T$'$
+        [T]
+        [vP
+          [you$_j$, name=you_vP]
+          [v$'$
+            [{wh.~book}$_i$, name=who_vP]
+            [v$'$
+              [v]
+              [VP
+                [{wh.~book}$_i$, name=who_VP]
+                [V$'$
+                  [V\\give]
+                  [PP
+                    [P\\to]
+                    [DP
+                      [{a fan of wh.~book$_i$}, roof, name=who_PP]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+]
+\draw[-{Stealth[length=4pt]}, thick]
+  (who_PP.west) -| ([xshift=-6mm]who_VP.south west) -- (who_VP.south west);
+\draw[-{Stealth[length=4pt]}, thick]
+  (who_VP.west) -| ([xshift=-8mm]who_vP.south west) -- (who_vP.south west);
+\draw[-{Stealth[length=4pt]}, thick]
+  (who_vP.west) -| ([xshift=-14mm]who_CP.south west) -- (who_CP.south west);
+\draw[-{Stealth[length=4pt]}, thick]
+  (you_vP.west) -| ([xshift=-10mm]you_TP.south west) -- (you_TP.south west);
+\end{forest}
+\xe
+
+\noindent
+The result is a convergent derivation. The wh-phrase has copies inside the PP (complement of \textit{of}), at Spec,VP (Theme of \textit{give}), at the vP edge, and at Spec,CP. Chain reduction deletes all lower copies at PF, and only the highest copy is pronounced. At LF, the copies in Spec,VP and inside the PP are both interpreted, yielding the reading in which the same book is both given and the object of fandom.
+
+\subsubsection{Ruling out the subject-gap case}
+
+The analysis also correctly rules out the unacceptable subject-gap dative PG in (\ref{ex_dat2}), repeated below:
+
+\ex \label{ex_dat2_repeat}
+*Which celebrity \gap{} gave a book [to a fan of \gap{}] yesterday?
+\xe
+
+\noindent
+Here, the wh-phrase \textit{which celebrity} originates inside the lowest DP as the complement of \textit{of}. After V merges with the PP, the direct object \textit{a book} is externally merged in Spec,VP. The structure at this point is shown in (\ref{ex_dat_bad_tree}):
+
+\ex \label{ex_dat_bad_tree}
+\begin{forest}
+for tree={
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  base=bottom,
+  inner sep=2pt,
+  s sep=7mm,
+  l sep=8mm,
+  anchor=center,
+}
+[vP
+  [\phantom{wh.~celeb.$_i$}, edge={dashed}]
+  [v$'$
+    [v]
+    [VP
+      [DP
+        [{a book}, roof]
+      ]
+      [V$'$
+        [V\\give]
+        [PP
+          [P\\to]
+          [DP
+            [{a fan of wh.~celeb.$_i$}, roof, name=whPP]
+          ]
+        ]
+      ]
+    ]
+  ]
+]
+\end{forest}
+\xe
+
+\noindent
+The wh-phrase must reach Spec,vP to check the external argument $\theta$-feature. However, \textit{a book} in Spec,VP intervenes between the PP-internal position and Spec,vP. By the Minimal Link Condition, \textit{a book} is a closer candidate for movement to Spec,vP, blocking the wh-phrase from reaching the external argument position. The derivation therefore crashes for the same reason as the bad complement-clause PG in (\ref{ex4.3_bad1}): an intervening DP prevents the wh-phrase from moving to the subject position.
+
+\subsubsection{Why ACC does not hold}
+
+The logic here mirrors the complement-clause case exactly. The PP complement of \textit{give} is not a separate derivational workspace. It is built within the same command unit as V, alongside the direct object. No Spell-Out barrier intervenes between the PP and the matrix VP, so the wh-phrase can move freely from within the PP to Spec,VP by ordinary movement.
+
+Because neither Multiple Spell-Out nor sideward movement is implicated, the timing-based constraints that produce ACC effects in adjunct and subject PGs simply do not apply. The direct object gap does c-command the PG inside the PP, but this is irrelevant, because there is no Spell-Out barrier to circumvent and no requirement that the two gaps stand in a particular structural relation. The c-command asymmetry is a structural fact, but under the present analysis it has no bearing on the well-formedness of the construction.
+
+This prediction distinguishes the present proposal from ACC-based accounts in a testable way. If ACC is a necessary condition on PG licensing, (\ref{ex_dat1b}) should be unacceptable. If, on the other hand, PG licensing is governed by locality and derivational timing, (\ref{ex_dat1b}) should be acceptable, degraded only to the extent that any PG construction incurs a general processing cost. To test this prediction, we turn to experimental evidence.
+
+\subsubsection{Experimental evidence}
+
+In this section, we present the results of an acceptability judgment experiment designed to test whether the licensing of dative PGs is constrained by anti-c-command or by locality. If our proposal is correct, then dative PGs like (\ref{ex_dat1b}) should be acceptable, and any degradation in PG constructions should track structural distance between the licensing gap and the PG, not c-command relations between them.
+
+To distinguish these possibilities, we constructed 24 experimental item sets in which two factors were systematically manipulated: (i) licensing gap position (subject gap vs.\ object gap) and (ii) PG presence (PG vs.\ full DP). The DP conditions serve as a baseline, ensuring that any observed effects are attributable to PG licensing rather than to independent factors. A sample item set is given in (\ref{ex_dat_items}):
+
+\pex \label{ex_dat_items} Sample item set:
+    \a Subject gap / DP:\\
+    This is the celebrity who introduced John to an admirer of the director.
+    \a Object gap / DP:\\
+    This is the celebrity who John introduced to an admirer of the director.
+    \a Subject gap / PG:\\
+    This is the celebrity who introduced John to an admirer of.
+    \a Object gap / PG:\\
+    This is the celebrity who John introduced to an admirer of.
+\xe
+
+\noindent
+The design allows us to tease apart two competing predictions. Under anti-c-command, the object-gap/PG condition (\ref{ex_dat_items}d) should be unacceptable, since the object gap c-commands the PG inside the PP. The subject-gap/PG condition (\ref{ex_dat_items}c) should be similarly unacceptable, since the subject gap also c-commands the PG. Under a locality-based account, by contrast, any PG penalty should be modulated by the distance between the two gaps: subject-gap PGs should be more degraded than object-gap PGs, because the subject position is structurally more distant from the PG inside the PP.
+
+\paragraph{Statistical analysis.} To evaluate whether licensing gap position and PG presence influence acceptability judgments, we conducted an ordinal logistic regression analysis. Both independent variables were contrast-coded as $\pm0.5$, and an interaction term was included to assess whether the effect of PG presence varied as a function of gap position. Data from 45 native speakers of English were analyzed.
+
+\paragraph{Main effects.} The analysis revealed a significant main effect of PG presence, with PG conditions rated significantly lower than DP conditions across all acceptability levels ($\beta = -4.880$, $SE = 0.398$, $z = -12.257$, $p < 0.001$). This confirms that the presence of a PG lowers acceptability ratings overall.
+
+However, the licensing gap position did not show a significant main effect ($\beta = 0.214$, $SE = 0.398$, $z = 0.538$, $p = 0.590$), suggesting that whether a gap was in the subject or object did not affect acceptability independently of PG presence.
+
+\paragraph{Interaction effect.} Critically, a significant interaction was found at the higher end of the acceptability scale ($\beta = -1.886$, $SE = 0.738$, $z = -2.554$, $p = 0.011$ for rating = 6). This result demonstrates that the penalty for PG presence is greater when the licensing gap is in the subject position than when it is in the object position.
+
+In other words, PG constructions are rated lower when the licensing gap is further away, that is, when the subject serves as the licensing gap rather than the object. Although the interaction does not reach significance at all rating levels, the significant effect at higher acceptability ratings suggests that distance effects influence the perceived well-formedness of PG structures in a systematic way.
+
+\paragraph{Discussion.} These results support the present proposal in two ways. First, object-gap dative PGs, the configuration that violates anti-c-command, are \textit{not} categorically unacceptable. If ACC were a necessary condition on PG licensing, we would expect these sentences to be sharply degraded, on a par with canonical ACC violations. Instead, they are rated as acceptable, consistent with our analysis in which the PP complement of \textit{give} is part of the same command unit as the direct object and therefore not subject to MSO or ACC.
+
+Second, the significant interaction between gap position and PG presence reveals that \textit{locality}, not c-command, is the relevant factor. Subject-gap PGs are more degraded than object-gap PGs, but this follows straightforwardly from the greater structural distance between the subject position and the PG inside the PP. Crucially, this distance effect is predicted by any account in which PG acceptability is sensitive to the locality of movement, including the phase-based approach developed here. It is not predicted by ACC, which treats both configurations, subject-gap and object-gap dative PGs, as equally bad.
+
+\section{Conclusion}
+
+The anti-c-command condition has long served as a central generalization about the distribution of parasitic gaps: the PG must not be c-commanded by its licensing gap. Since its initial formulation in \cite{engdahl1983}, a variety of accounts have been proposed to derive ACC from deeper principles of the grammar: from distinctions among trace types \citep{chomsky1981, chomsky1982}, from the interaction of chain formation and linearization \citep{nunes2004}, and from the semantics of derived predication \citep{nissenbaum2000, arregi2022}. Each of these proposals captures the core ACC pattern in canonical adjunct PGs. Yet as we have shown, each faces a common challenge: the acceptability of complement-clause PGs, where the licensing gap c-commands the PG in apparent violation of ACC.
+
+Previous work has attempted to resolve this tension through CP extraposition \citep{arregi2022}, which would restore the structural configuration required by ACC. However, the experimental results presented in Section 3 argue against this solution. We found no evidence that extraposition is necessary for complement-clause PGs: sentences without an overt complementizer, where extraposition is disfavored, were rated \textit{more} acceptable than those with one, directly contradicting the prediction that extraposition is required to satisfy ACC.
+
+In light of these findings, we developed an alternative account in which the anti-c-command condition is not a primitive of the grammar but a \textit{consequence} of how derivations unfold. The proposal builds on the interaction of three independently motivated components of Minimalist syntax: sideward movement \citep{nunes2004}, Multiple Spell-Out \citep{uriagereka1999}, and the treatment of $\theta$-roles as formal features checked by phase \citep{hornstein1999}. On this view, adjuncts and subjects are assembled in separate derivational workspaces and must be spelled out before merging with the main clausal spine. A wh-phrase can be copied out of these domains by sideward movement before Spell-Out applies, but only into $\theta$-positions that are available at that derivational stage, namely positions inside VP that are structurally below the adjunction or merger site. The c-command asymmetry that characterizes ACC is thus a byproduct of when Spell-Out applies and the height of the adjunction site, not a constraint that the grammar enforces directly. For complements, by contrast, no separate workspace is required and no Spell-Out barrier intervenes. The wh-phrase moves through complement domains by ordinary successive-cyclic movement, and no ACC effect is expected.
+
+Beyond capturing the standard ACC pattern, this approach makes new predictions that appear to be borne out. The analysis predicts a contrast between unergative and unaccusative verbs in adjunct PGs: because unaccusative subjects originate inside VP (below the adjunction site), sideward movement into the internal argument position should be possible, whereas unergative subjects, which originate in Spec,vP (above the adjunction site), should block such movement. As discussed in Section 4.1, this contrast appears to be borne out. Such a distinction is not predicted by ACC-based accounts, which attribute the relevant constraint to the c-command relation between the licensing gap and the PG at the representational level. The analysis also predicts that prepositional dative PGs, where the licensing gap c-commands the PG inside a PP complement, should be acceptable, since complements are built within the same command unit as the selecting verb. The experimental results reported in Section 4.4 confirm this prediction: object-gap dative PGs are not categorically degraded, and the degree of degradation tracks structural distance rather than c-command, consistent with a locality-based account. At the same time, the analysis correctly rules out unacceptable configurations: in both complement-clause and dative PGs, cases in which the wh-phrase would need to cross an intervening DP to reach the subject position are blocked by the Minimal Link Condition, and cases in which a single DP would receive two Case values within a single phase domain crash independently. These results follow from general principles of the grammar, without any stipulation specific to PG constructions.
+
+These results have broader implications for our understanding of PGs and the architecture of the grammar. The present proposal dispenses with two theoretical devices whose status under Minimalist assumptions is uncertain. First, it eliminates the need for a typology of traces. Trace-based accounts of ACC require that PGs be licensed by variables but not by other trace types, presupposing that the grammar distinguishes among different kinds of empty categories left behind by movement. Under the copy theory of movement adopted here, there are no traces at all, only copies, and the distinction between trace types has no role to play. Second, the proposal does away with null operators. On the null operator hypothesis \citep{chomsky1986}, the PG is the trace of a covert operator that moves within the island domain and creates a derived predicate. This mechanism is specific to PG constructions and has no independent motivation in a framework where all movement is driven by feature checking. Under sideward movement, the PG and the licensing gap are simply copies of the same element, linked by a single movement chain. No covert operator is posited, and no special predication mechanism is required.
+
+More generally, the account developed here supports the view that locality effects in grammar, including those traditionally attributed to ACC, are best understood as consequences of how structures are assembled in real time, rather than as filters on finished representations. The timing of Spell-Out, the availability of $\theta$-positions, and the phase-by-phase computation of $\theta$-roles and Case together determine which configurations are possible. The anti-c-command condition is not a separate principle of the grammar but an emergent property of Minimalist derivational architecture.
+
+\printbibliography
+
+\end{document}

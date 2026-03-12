@@ -1,12 +1,8 @@
-# CLAUDE.MD -- Academic Project Development with Claude Code
+# CLAUDE.MD -- Linguistics Research Workflow
 
-<!-- HOW TO USE: Replace [BRACKETED PLACEHOLDERS] with your project info.
-     Customize Beamer environments and CSS classes for your theme.
-     Keep this file under ~150 lines — Claude loads it every session.
-     See the guide at docs/workflow-guide.html for full documentation. -->
-
-**Project:** [YOUR PROJECT NAME]
-**Institution:** [YOUR INSTITUTION]
+**Project:** Syntax & Psycholinguistics Research
+**Institution:** Northwestern University
+**Researcher:** Michael Dover
 **Branch:** main
 
 ---
@@ -14,30 +10,37 @@
 ## Core Principles
 
 - **Plan first** -- enter plan mode before non-trivial tasks; save plans to `quality_reports/plans/`
-- **Verify after** -- compile/render and confirm output at the end of every task
-- **Single source of truth** -- Beamer `.tex` is authoritative; Quarto `.qmd` derives from it
+- **Verify after** -- compile and confirm output at the end of every task
 - **Quality gates** -- nothing ships below 80/100
 - **[LEARN] tags** -- when corrected, save `[LEARN:category] wrong → right` to MEMORY.md
+- **No em-dashes** -- do not use em-dashes in writing
+- **No plagiarism** -- when describing ideas from a cited source, use different language; never copy verbiage from the source
 
 ---
 
 ## Folder Structure
 
 ```
-[YOUR-PROJECT]/
-├── CLAUDE.MD                    # This file
+linguistics-workflow/
+├── CLAUDE.md                    # This file
 ├── .claude/                     # Rules, skills, agents, hooks
-├── Bibliography_base.bib        # Centralized bibliography
-├── Figures/                     # Figures and images
-├── Preambles/header.tex         # LaTeX headers
-├── Slides/                      # Beamer .tex files
-├── Quarto/                      # RevealJS .qmd files + theme
-├── docs/                        # GitHub Pages (auto-generated)
-├── scripts/                     # Utility scripts + R code
-├── quality_reports/             # Plans, session logs, merge reports
+├── Bibliography/                # .bib files (references.bib)
+├── Papers/                      # LaTeX papers, per-project subdirs
+│   ├── anti-c-command/
+│   ├── symbiotic-gaps/
+│   ├── control-scope-reconstruction/
+│   └── dissertation-prospectus/
+├── Presentations/               # PowerPoint (.pptx) files
+├── Figures/                     # Shared figures and images
+├── Preambles/                   # Shared LaTeX preambles
+├── R/                           # Analysis scripts, per-project subdirs
+│   ├── symbiotic-gaps/
+│   └── control-scope-reconstruction/
+├── Data/                        # Experimental data (gitignored)
+├── scripts/                     # Utility scripts
 ├── explorations/                # Research sandbox (see rules)
-├── templates/                   # Session log, quality report templates
-└── master_supporting_docs/      # Papers and existing slides
+├── quality_reports/             # Plans, session logs, merge reports
+└── templates/                   # Document templates
 ```
 
 ---
@@ -45,17 +48,15 @@
 ## Commands
 
 ```bash
-# LaTeX (3-pass, XeLaTeX only)
-cd Slides && TEXINPUTS=../Preambles:$TEXINPUTS xelatex -interaction=nonstopmode file.tex
-BIBINPUTS=..:$BIBINPUTS bibtex file
-TEXINPUTS=../Preambles:$TEXINPUTS xelatex -interaction=nonstopmode file.tex
-TEXINPUTS=../Preambles:$TEXINPUTS xelatex -interaction=nonstopmode file.tex
-
-# Deploy Quarto to GitHub Pages
-./scripts/sync_to_docs.sh LectureN
+# LaTeX (3-pass, XeLaTeX + biber)
+cd Papers/project-name && \
+  TEXINPUTS=../../Preambles:$TEXINPUTS xelatex -interaction=nonstopmode file.tex && \
+  biber file && \
+  TEXINPUTS=../../Preambles:$TEXINPUTS xelatex -interaction=nonstopmode file.tex && \
+  TEXINPUTS=../../Preambles:$TEXINPUTS xelatex -interaction=nonstopmode file.tex
 
 # Quality score
-python scripts/quality_score.py Quarto/file.qmd
+python scripts/quality_score.py Papers/project-name/file.tex
 ```
 
 ---
@@ -65,7 +66,7 @@ python scripts/quality_score.py Quarto/file.qmd
 | Score | Gate | Meaning |
 |-------|------|---------|
 | 80 | Commit | Good enough to save |
-| 90 | PR | Ready for deployment |
+| 90 | PR | Ready for review |
 | 95 | Excellence | Aspirational |
 
 ---
@@ -74,19 +75,15 @@ python scripts/quality_score.py Quarto/file.qmd
 
 | Command | What It Does |
 |---------|-------------|
-| `/compile-latex [file]` | 3-pass XeLaTeX + bibtex |
-| `/deploy [LectureN]` | Render Quarto + sync to docs/ |
-| `/extract-tikz [LectureN]` | TikZ → PDF → SVG |
+| `/compile-latex [file]` | 3-pass XeLaTeX + biber |
+| `/extract-tikz [file]` | TikZ/forest → PDF → SVG |
 | `/proofread [file]` | Grammar/typo/overflow review |
 | `/visual-audit [file]` | Slide layout audit |
 | `/pedagogy-review [file]` | Narrative, notation, pacing review |
 | `/review-r [file]` | R code quality review |
-| `/qa-quarto [LectureN]` | Adversarial Quarto vs Beamer QA |
 | `/slide-excellence [file]` | Combined multi-agent review |
-| `/translate-to-quarto [file]` | Beamer → Quarto translation |
 | `/validate-bib` | Cross-reference citations |
-| `/devils-advocate` | Challenge slide design |
-| `/create-lecture` | Full lecture creation |
+| `/devils-advocate` | Challenge design/argumentation |
 | `/commit [msg]` | Stage, commit, PR, merge |
 | `/lit-review [topic]` | Literature search + synthesis |
 | `/research-ideation [topic]` | Research questions + strategies |
@@ -99,38 +96,61 @@ python scripts/quality_score.py Quarto/file.qmd
 
 ---
 
-<!-- CUSTOMIZE: Replace the example entries below with your own
-     Beamer environments and Quarto CSS classes. These are examples
-     from the original project — delete them and add yours. -->
+## LaTeX Conventions
 
-## Beamer Custom Environments
+**Compiler:** XeLaTeX + biber (never pdflatex, never bibtex)
+**Style:** LSA Unified Style Sheet (`biblatex` with `style=unified`)
+**Font:** TeX Gyre Termes via `fontspec`
 
-| Environment       | Effect        | Use Case       |
-|-------------------|---------------|----------------|
-| `[your-env]`      | [Description] | [When to use]  |
+### Linguistic Examples (`expex`)
 
-<!-- Example entries (delete and replace with yours):
-| `keybox` | Gold background box | Key points |
-| `highlightbox` | Gold left-accent box | Highlights |
-| `definitionbox[Title]` | Blue-bordered titled box | Formal definitions |
--->
+| Command | Use | Example |
+|---------|-----|---------|
+| `\ex` ... `\xe` | Simple example | Single sentence with judgment |
+| `\pex` ... `\xe` | Multi-part example | (a), (b), (c) sub-examples |
+| `\begingl` ... `\endgl` | Interlinear gloss | Foreign language data |
+| `\ljudge{*}` | Judgment marker | Ungrammaticality |
+| `\ljudge{?}` | Judgment marker | Marginal acceptability |
 
-## Quarto CSS Classes
+**Anti-patterns:** Never renumber examples without asking. Never switch between `expex` and `gb4e`/`linguex` syntax. Never omit judgment markers on examples that have them.
 
-| Class              | Effect        | Use Case       |
-|--------------------|---------------|----------------|
-| `[.your-class]`    | [Description] | [When to use]  |
+### Syntactic Trees (`forest`)
 
-<!-- Example entries (delete and replace with yours):
-| `.smaller` | 85% font | Dense content slides |
-| `.positive` | Green bold | Good annotations |
--->
+Use `forest` with `linguistics` library. Trees should use:
+- Triangles for elided structure (`triangle`)
+- Movement arrows via `\draw` with appropriate edge styles
+- Consistent node labels (TP, vP, CP, etc.)
+
+### Notation Conventions
+
+| Notation | Meaning | Convention |
+|----------|---------|------------|
+| `*` | Ungrammatical | Before example sentence |
+| `?` / `??` | Marginal / degraded | Before example sentence |
+| `%` | Speaker variation | Before example sentence |
+| `_i` / `_j` | Coindexation | Subscript indices |
+| `t_i` | Trace | Movement landing site |
+| `<...>` | Copy (if using copy theory) | Struck-through or angle brackets |
+
+---
+
+## R Conventions
+
+**Primary methods:**
+- Ordinal regression (CLMMs) via `ordinal` package -- acceptability judgments
+- Linear mixed-effects models via `lme4::lmer` -- reading times (maze task)
+
+**Experiment platform:** PCIbex
+
+**Typical data structure:** participant, item, condition, list, response (1-7 scale or RT in ms)
 
 ---
 
 ## Current Project State
 
-| Lecture | Beamer | Quarto | Key Content |
-|---------|--------|--------|-------------|
-| 1: [Topic] | `Lecture01_Topic.tex` | `Lecture1_Topic.qmd` | [Brief description] |
-| 2: [Topic] | `Lecture02_Topic.tex` | -- | [Brief description] |
+| Paper | Directory | Status | Key Topic |
+|-------|-----------|--------|-----------|
+| Anti-c-command | `Papers/anti-c-command/` | Active | Anti-c-command and parasitic gaps |
+| Symbiotic gaps | `Papers/symbiotic-gaps/` | Active | Symbiotic gap constructions |
+| Control & scope reconstruction | `Papers/control-scope-reconstruction/` | Active | Control and scope reconstruction |
+| Dissertation prospectus | `Papers/dissertation-prospectus/` | Reference | Prospectus (2024) |

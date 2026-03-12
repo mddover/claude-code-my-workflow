@@ -29,7 +29,7 @@ Run a comprehensive consistency audit across the entire repository, fix all issu
 Launch these 4 agents simultaneously using `Task` with `subagent_type=general-purpose`:
 
 #### Agent 1: Guide Content Accuracy
-Focus: `guide/workflow-guide.qmd`
+Focus: `README.md`
 - All numeric claims match reality (skill count, agent count, rule count, hook count)
 - All file paths mentioned actually exist on disk
 - All skill/agent/rule names match actual directory names
@@ -73,7 +73,6 @@ Categorize each finding:
 - **False alarm**: Discard (document WHY it's false for future rounds)
 
 Common false alarms to watch for:
-- Quarto callout `## Title` inside `:::` divs — this is standard syntax, NOT a heading bug
 - `allowed-tools` linter warning — known linter bug (Claude Code issue #25380), field IS valid
 - Counts in old session logs — these are historical records, not user-facing docs
 
@@ -84,21 +83,15 @@ Apply fixes in parallel where possible. For each fix:
 2. Apply the fix
 3. Verify the fix (grep for stale values, check syntax)
 
-### PHASE 4: Re-render if Guide Changed
-
-If `guide/workflow-guide.qmd` was modified:
-```bash
-quarto render guide/workflow-guide.qmd
-cp guide/workflow-guide.html docs/workflow-guide.html
-```
-
-### PHASE 5: Loop or Declare Clean
+### PHASE 4: Loop or Declare Clean
 
 After fixing, launch a fresh set of 4 agents to verify.
 - If new issues found → fix and loop again
 - If zero genuine issues → declare clean and report summary
 
 **Max loops: 5** (to prevent infinite cycling)
+
+Note: Quarto render step is no longer applicable for this linguistics workflow (uses LaTeX only).
 
 ## Key Lessons from Past Audits
 
@@ -130,13 +123,13 @@ After each round, report:
 | # | Severity | File | Issue | Status |
 |---|----------|------|-------|--------|
 | 1 | Critical | file.py:42 | Description | Fixed |
-| 2 | Medium | file.qmd:100 | Description | Fixed |
+| 2 | Medium | file.tex:100 | Description | Fixed |
 
 ### Verification
 - [ ] No stale counts (grep confirms)
 - [ ] All hooks have fail-open + future annotations
-- [ ] Guide renders successfully
-- [ ] docs/ updated
+- [ ] README accurate
+- [ ] No stale Quarto/Beamer references in active files
 
 ### Result: [CLEAN | N issues remaining]
 ```

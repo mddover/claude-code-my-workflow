@@ -1,6 +1,6 @@
 ---
 name: review-paper
-description: Comprehensive manuscript review covering argument structure, econometric specification, citation completeness, and potential referee objections
+description: Comprehensive manuscript review covering argument structure, statistical specification, citation completeness, and potential referee objections
 argument-hint: "[paper filename in master_supporting_docs/ or path to .tex/.pdf]"
 allowed-tools: ["Read", "Grep", "Glob", "Write", "Task"]
 ---
@@ -9,7 +9,7 @@ allowed-tools: ["Read", "Grep", "Glob", "Write", "Task"]
 
 Produce a thorough, constructive review of an academic manuscript — the kind of report a top-journal referee would write.
 
-**Input:** `$ARGUMENTS` — path to a paper (.tex, .pdf, or .qmd), or a filename in `master_supporting_docs/`.
+**Input:** `$ARGUMENTS` — path to a paper (.tex or .pdf), or a filename in `master_supporting_docs/`.
 
 ---
 
@@ -48,12 +48,12 @@ Produce a thorough, constructive review of an academic manuscript — the kind o
 - Are robustness checks adequate?
 - Is the estimator appropriate for the research design?
 
-### 3. Econometric Specification
+### 3. Statistical Specification
 - Correct standard errors (clustered? robust? bootstrap?)?
 - Appropriate functional form?
 - Sample selection issues?
 - Multiple testing concerns?
-- Are point estimates economically meaningful (not just statistically significant)?
+- Are effect sizes meaningful (not just statistically significant)?
 
 ### 4. Literature Positioning
 - Are the key papers cited?
@@ -100,7 +100,7 @@ Produce a thorough, constructive review of an academic manuscript — the kind o
 ## Major Concerns
 
 ### MC1: [Title]
-- **Dimension:** [Identification / Econometrics / Argument / Literature / Writing / Presentation]
+- **Dimension:** [Identification / Statistics / Argument / Literature / Writing / Presentation]
 - **Issue:** [Specific description]
 - **Suggestion:** [How to address it]
 - **Location:** [Section/page/table if applicable]
@@ -135,7 +135,7 @@ These are the tough questions a top referee would likely raise:
 |-----------|-------------|
 | Argument Structure | [N] |
 | Identification | [N] |
-| Econometrics | [N] |
+| Statistics | [N] |
 | Literature | [N] |
 | Writing | [N] |
 | Presentation | [N] |

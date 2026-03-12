@@ -1,0 +1,55 @@
+%%% linguistics-preamble.sty
+%%% Shared preamble for Dover & Yoshida papers
+%%% Usage: \usepackage{linguistics-preamble}
+%%% Requires: TEXINPUTS includes ../../Preambles (or equivalent)
+%%%
+%%% This file is the single source of truth for package loading
+%%% and shared configuration. Paper-specific commands and
+%%% \addbibresource should go in each paper's main.tex.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{linguistics-preamble}[2026/03/12 Shared linguistics preamble]
+
+%%% Geometry and layout
+\RequirePackage[margin=1in]{geometry}
+\RequirePackage{setspace}
+\onehalfspacing
+\setlength{\parindent}{0.4in}
+
+%%% Fonts — Times, per LSA style
+\RequirePackage{fontspec}
+\setmainfont{TeX Gyre Termes}
+
+%%% Linguistic examples
+\RequirePackage{expex}
+\lingset{everygla=\it, belowglpreambleskip=-0.2ex, aboveglftskip=-0.2ex}
+
+%%% Trees
+\RequirePackage[linguistics]{forest}
+
+%%% Bibliography — Unified Style Sheet for Linguistics (LSA)
+\RequirePackage[backend=biber,
+            style=unified,
+            natbib=true,
+            maxcitenames=3,
+            maxbibnames=99]{biblatex}
+
+%%% Cross-referencing and hyperlinks
+\RequirePackage[hidelinks]{hyperref}
+
+%%% Tables and figures
+\RequirePackage{booktabs}
+\RequirePackage{graphicx}
+\RequirePackage{placeins}
+
+%%% Math
+\RequirePackage{amssymb}
+\RequirePackage{amsmath}
+
+%%% TikZ (for diagrams beyond forest trees)
+\RequirePackage{tikz}
+\usetikzlibrary{decorations.pathreplacing,calc}
+\usetikzlibrary{arrows.meta,positioning}
+
+%%% Text markup
+\RequirePackage{soul}

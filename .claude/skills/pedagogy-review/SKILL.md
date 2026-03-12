@@ -12,8 +12,8 @@ Perform a comprehensive pedagogical review.
 ## Steps
 
 1. **Identify the file** specified in `$ARGUMENTS`
-   - If no argument, ask user which lecture to review
-   - If just a name, look in `Quarto/` or `Slides/`
+   - If no argument, ask user which paper/presentation to review
+   - If just a name, look in `Papers/` or `Presentations/`
 
 2. **Launch the pedagogy-reviewer agent** with the full file path
    - The agent checks 13 pedagogical patterns

@@ -1,13 +1,12 @@
 ---
 paths:
   - "**/*.R"
-  - "Figures/**/*.R"
-  - "scripts/**/*.R"
+  - "R/**/*.R"
 ---
 
 # R Code Standards
 
-**Standard:** Senior Principal Data Engineer + PhD researcher quality
+**Standard:** Reproducible experimental linguistics analysis
 
 ---
 
@@ -25,72 +24,114 @@ paths:
 - Default parameters, no magic numbers
 - Named return values (lists or tibbles)
 
-## 3. Domain Correctness
+## 3. Data Pipeline (PCIbex)
 
-<!-- Customize for your field's known pitfalls -->
-- Verify estimator implementations match slide formulas
-- Check known package bugs (document below in Common Pitfalls)
+### Import
+```r
+# Standard PCIbex import pattern
+raw <- read.csv("Data/project-name/results.csv",
+                comment.char = "#",
+                stringsAsFactors = FALSE)
+```
 
-## 4. Visual Identity
+### Cleaning Checklist
+- [ ] Remove practice/filler items (or analyze separately)
+- [ ] Apply participant exclusion criteria (document in comments)
+- [ ] Check attention/comprehension question accuracy (threshold: e.g., >80%)
+- [ ] Convert response columns to correct types
+- [ ] Set factor levels explicitly: `factor(condition, levels = c("a", "b", "c"))`
+- [ ] Set contrast coding explicitly: `contrasts(df$condition) <- contr.sum(n)`
+
+### RT Data (Maze Task)
+- [ ] Exclude RTs < 100ms and > 5000ms (or document your cutoffs)
+- [ ] Log-transform or inverse-transform if needed
+- [ ] Z-score by participant if comparing across experiments
+- [ ] Analyze critical region AND spillover region(s)
+
+## 4. Model Specification
+
+### Acceptability Judgments (CLMM)
+```r
+library(ordinal)
+df$response <- factor(df$response, ordered = TRUE)
+
+# Maximal model first
+m_full <- clmm(response ~ condition + (1 + condition | participant) + (1 + condition | item),
+               data = df)
+
+# If convergence fails, document and simplify
+m_reduced <- clmm(response ~ condition + (1 | participant) + (1 | item),
+                  data = df)
+# ALWAYS check: m_reduced$convergence
+```
+
+### Reading Times (lmer)
+```r
+library(lme4)
+
+# Maximal model first (Barr et al. 2013)
+m_full <- lmer(log_rt ~ condition * region + (1 + condition | participant) + (1 + condition | item),
+               data = df)
+
+# If singular fit, simplify random effects (document each step)
+```
+
+### Post-hoc Tests
+```r
+library(emmeans)
+emm <- emmeans(model, pairwise ~ condition)
+summary(emm$contrasts, adjust = "bonferroni")
+```
+
+## 5. Visual Identity
 
 ```r
-# --- Your institutional palette ---
-primary_blue  <- "#012169"
-primary_gold  <- "#f2a900"
-accent_gray   <- "#525252"
+# --- Project palette ---
+primary_purple <- "#4E2A84"   # Northwestern purple
+primary_black  <- "#000000"
+accent_gray    <- "#525252"
 positive_green <- "#15803d"
-negative_red  <- "#b91c1c"
+negative_red   <- "#b91c1c"
 ```
 
 ### Custom Theme
 ```r
-theme_custom <- function(base_size = 14) {
+theme_ling <- function(base_size = 12) {
   theme_minimal(base_size = base_size) +
     theme(
-      plot.title = element_text(face = "bold", color = primary_blue),
+      plot.title = element_text(face = "bold"),
       legend.position = "bottom"
     )
 }
 ```
 
-### Figure Dimensions for Beamer
+### Figure Dimensions
 ```r
-ggsave(filepath, width = 12, height = 5, bg = "transparent")
+ggsave(filepath, width = 7, height = 5, dpi = 300)
 ```
 
-## 5. RDS Data Pattern
-
-**Heavy computations saved as RDS; slide rendering loads pre-computed data.**
+## 6. Results Export
 
 ```r
-saveRDS(result, file.path(out_dir, "descriptive_name.rds"))
+# Save fitted model
+saveRDS(model, file.path(out_dir, "clmm_condition.rds"))
+
+# Save tidy summary for paper
+library(broom)
+write.csv(tidy(model, conf.int = TRUE),
+          file.path(out_dir, "clmm_condition_summary.csv"),
+          row.names = FALSE)
 ```
 
-## 6. Common Pitfalls
+## 7. Common Pitfalls
 
-<!-- Add your field-specific pitfalls here -->
 | Pitfall | Impact | Prevention |
 |---------|--------|------------|
-| Missing `bg = "transparent"` | White boxes on slides | Always include in ggsave() |
-| Hardcoded paths | Breaks on other machines | Use relative paths |
-
-## 7. Line Length & Mathematical Exceptions
-
-**Standard:** Keep lines <= 100 characters.
-
-**Exception: Mathematical Formulas** -- lines may exceed 100 chars **if and only if:**
-
-1. Breaking the line would harm readability of the math (influence functions, matrix ops, finite-difference approximations, formula implementations matching paper equations)
-2. An inline comment explains the mathematical operation:
-   ```r
-   # Sieve projection: inner product of residuals onto basis functions P_k
-   alpha_k <- sum(r_i * basis[, k]) / sum(basis[, k]^2)
-   ```
-3. The line is in a numerically intensive section (simulation loops, estimation routines, inference calculations)
-
-**Quality Gate Impact:**
-- Long lines in non-mathematical code: minor penalty (-1 to -2 per line)
-- Long lines in documented mathematical sections: no penalty
+| `ordinal::clmm` convergence warning ignored | Invalid estimates | Check `model$convergence$code == 0` |
+| Default treatment coding | Misleading main effects | Set `contr.sum` or custom contrasts |
+| PCIbex column order changes between experiments | Wrong data | Read with explicit column names |
+| Maze task: analyzing only critical region | Missing spillover effects | Always check region + 1 and + 2 |
+| Not saving model objects | Can't reproduce tables | `saveRDS()` every model |
 
 ## 8. Code Quality Checklist
 
@@ -98,8 +139,11 @@ saveRDS(result, file.path(out_dir, "descriptive_name.rds"))
 [ ] Packages at top via library()
 [ ] set.seed() once at top
 [ ] All paths relative
-[ ] Functions documented (Roxygen)
-[ ] Figures: transparent bg, explicit dimensions
-[ ] RDS: every computed object saved
+[ ] Factor levels set explicitly
+[ ] Contrast coding set explicitly
+[ ] Maximal model attempted first
+[ ] Convergence checked
+[ ] Figures: explicit dimensions, labeled axes
+[ ] Models saved via saveRDS()
 [ ] Comments explain WHY not WHAT
 ```

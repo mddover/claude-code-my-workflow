@@ -1,7 +1,7 @@
 ---
 name: visual-audit
-description: Perform adversarial visual audit of Quarto or Beamer slides checking for overflow, font consistency, box fatigue, and layout issues.
-argument-hint: "[QMD or TEX filename]"
+description: Perform adversarial visual audit of Beamer slides checking for overflow, font consistency, box fatigue, and layout issues.
+argument-hint: "[TEX filename]"
 allowed-tools: ["Read", "Grep", "Glob", "Write", "Task"]
 ---
 
@@ -13,11 +13,7 @@ Perform a thorough visual layout audit of a slide deck.
 
 1. **Read the slide file** specified in `$ARGUMENTS`
 
-2. **For Quarto (.qmd) files:**
-   - Render with `quarto render Quarto/$ARGUMENTS`
-   - Open in browser to inspect each slide
-
-3. **For Beamer (.tex) files:**
+2. **For Beamer (.tex) files:**
    - Compile and check for overfull hbox warnings
 
 4. **Audit every slide for:**

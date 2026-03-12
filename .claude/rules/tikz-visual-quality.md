@@ -1,6 +1,6 @@
 ---
 paths:
-  - "Slides/**/*.tex"
+  - "Papers/**/*.tex"
   - "Figures/**/*.tex"
 ---
 
@@ -22,7 +22,7 @@ paths:
 - **Solid dots/lines** = observed outcomes, realized paths
 - **Hollow circles/dashed lines** = counterfactual outcomes, unrealized paths
 - Use consistent colors for semantic meaning (positive, negative, neutral)
-- Define colors in your Beamer theme for reuse
+- Define colors in your preamble for reuse
 
 ### Line Weights
 - Axes: `thick`
@@ -52,5 +52,5 @@ paths:
 
 ## Single Source of Truth
 
-**The Beamer `.tex` file is the authoritative source for ALL TikZ diagrams.**
-Edit TikZ in the Beamer file FIRST, then copy verbatim to `extract_tikz.tex`.
+**The paper `.tex` file is the authoritative source for ALL TikZ diagrams.**
+Edit TikZ in the paper file FIRST, then copy verbatim to `extract_tikz.tex`.
